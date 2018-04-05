@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.zg.webatis.mapper.ColumnMapper">
+
+    <resultMap id="ColumnEntityMap" type="tech.zg.webatis.entity.ColumnEntity">
+        <result column="column_name" property="columnName" jdbcType="VARCHAR"/>
+        <result column="data_type" property="dataType" jdbcType="VARCHAR"/>
+        <result column="column_comment" property="columnComment" jdbcType="VARCHAR"/>
+        <result column="column_key" property="columnKey" jdbcType="VARCHAR"/>
+        <result column="extra" property="extra" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="SelectColumnSql">
+        col.column_name,
+        col.data_type,
+        col.column_comment,
+        col.column_key,
+        col.extra
+    </sql>
+
+    <sql id="WhereSql">
+    </sql>
+
+    <select id="queryColumnsByTableName" resultMap="ColumnEntityMap">
+        select
+        <include refid="SelectColumnSql"/>
+        from information_schema.columns col
+        where table_schema = (select database())
+        <if test="tableName != null and tableName.trim() != ''">
+            and table_name = #{tableName}
+        </if>
+        order by ordinal_position
+    </select>
+
+</mapper>
