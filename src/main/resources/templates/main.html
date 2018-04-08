@@ -7,10 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="../layui/css/layui.css"/>
     <script src="../layui/layui.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        var _appDomain = [[${_appDomain}]];
+        var _contextPath = [[${_contextPath}]];
+        var _contextPathUri = _appDomain + _contextPath;
+        var _version = [[${_version}]] || "V1.0.0";
+    </script>
 </div>
 
 <div class="layui-header" th:fragment="navbar" id="topbar">
-    <div class="layui-logo">layui 后台布局</div>
+    <div class="layui-logo">webatis代码生成器</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <!--<ul class="layui-nav layui-layout-left">
         <a href="javascript:;" class="iconfont hideMenu icon-menu1"></a>
@@ -49,22 +55,16 @@
             <li class="layui-nav-item layui-nav-itemed">
                 <a class="" href="javascript:;">数据库配置</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">添加数据库</a></dd>
-                    <!--<dd><a href="javascript:;">列表二</a></dd>
-                    <dd><a href="javascript:;">列表三</a></dd>-->
-                    <!--<dd><a href="">超链接</a></dd>-->
+                    <!--<dd><a href="/dbs/add">添加数据库</a></dd>-->
+                    <dd><a th:href="${_contextPath}+ '/dbs/add'">添加数据库</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item layui-nav-itemed">
                 <a class="" href="javascript:;">代码生成</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="list">数据表列表</a></dd>
-                    <!--<dd><a href="javascript:;">列表二</a></dd>
-                    <dd><a href="javascript:;">列表三</a></dd>-->
-                    <!--<dd><a href="">超链接</a></dd>-->
+                    <dd><a th:href="${_contextPath}+ '/table/list'">数据表列表</a></dd>
                 </dl>
             </li>
-            <!--<li class="layui-nav-item"><a href="">发布商品</a></li>-->
         </ul>
     </div>
 </div>

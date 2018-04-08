@@ -1,3 +1,19 @@
+spring:
+  profiles:
+    #active: ${env}
+    active: dev
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  resources:
+    static-locations: classpath:/static/,classpath:/views/,classpath:/layui
+
 #Tomcat
 server:
   context-path: /webatis
@@ -6,44 +22,12 @@ server:
     max-threads: 10
     min-spare-threads: 10
 
-#mysql
-spring:
-    thymeleaf:
-        cache: false
-        prefix: classpath:/templates/
-        suffix: .html
-        encoding: UTF-8
-        content-type: text/html
-    jackson:
-        time-zone: GMT+8
-        date-format: yyyy-MM-dd HH:mm:ss
-    resources:
-        static-locations: classpath:/static/,classpath:/views/,classpath:/layui
-
 #Mybatis配置
 mybatis:
-    mapperLocations: classpath:mapper/**/*.xml
-    typeAliasesPackage: tech.zg.webatis.entity
-    configLocation: classpath:mybatis-config.xml
-
-#数据源配置DataSourceConfig读取
-druid:
-   dataSource:
-        #type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.jdbc.Driver
-        maxActive: 100
-        maxWait: 60000
-        cachePrepStmts: true
-        useServerPrepStmts: true
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        maxLifetime: 60000
-        master:
-            #url: jdbc:mysql://localhost:3306/crm?useUnicode=true&characterEncoding=UTF-8
-            url: jdbc:mysql://120.78.71.173:3306/webatis?useUnicode=true&characterEncoding=utf-8
-            username: root
-            password: mysql
+  mapperLocations: classpath:mapper/**/*.xml
+  typeAliasesPackage: tech.zg.webatis.entity
+  configLocation: classpath:mybatis-config.xml
 
 #LogBack
 logback:
-    level: INFO
+  level: INFO

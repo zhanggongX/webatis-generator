@@ -91,7 +91,7 @@
         </dependency>
     </dependencies>
 
-    <!--<profiles>
+    <profiles>
         <profile>
             <id>dev</id>
             <activation>
@@ -102,9 +102,9 @@
             </properties>
         </profile>
         <profile>
-            <id>test</id>
+            <id>sit</id>
             <properties>
-                <env>test</env>
+                <env>sit</env>
             </properties>
         </profile>
         <profile>
@@ -113,7 +113,7 @@
                 <env>prod</env>
             </properties>
         </profile>
-    </profiles>-->
+    </profiles>
 
     <repositories>
         <repository>

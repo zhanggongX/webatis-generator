@@ -1,0 +1,29 @@
+spring:
+  profiles: sit
+
+#数据源配置DataSourceConfig读取
+druid:
+  dataSource:
+    #type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    maxActive: 100
+    maxWait: 60000
+    cachePrepStmts: true
+    useServerPrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    maxLifetime: 60000
+    master:
+        #url: jdbc:mysql://localhost:3306/crm?useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://120.78.71.173:3306/webatis?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: mysql
+
+#LogBack
+logback:
+  level: INFO
+
+webatis:
+  appDomain: http://localhost:8888
+  contextPath: /webatis
+  version: v1.0.0
