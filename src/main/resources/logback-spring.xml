@@ -1,5 +1,5 @@
 <configuration>
-    <contextName>kobe</contextName>
+    <contextName>webatis-generator</contextName>
     <springProperty scope="context" name="logLevel" source="logback.level"/>
     
     <!-- 控制台 -->
@@ -12,13 +12,13 @@
 
     <!-- INFO 文件 -->
     <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>logs/kobe.info.log</File>
+        <File>logs/webatis-generator.info.log</File>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/kobe.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>logs/webatis-generator.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>512MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -33,13 +33,13 @@
 
     <!-- ERROR 文件 -->
     <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>logs/kobe.error.log</File>
+        <File>logs/webatis-generator.error.log</File>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/kobe.%d{yyyyMMdd}.error.%i.log.gz</fileNamePattern>
+            <fileNamePattern>logs/webatis-generator.%d{yyyyMMdd}.error.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>512MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>

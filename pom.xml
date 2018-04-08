@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>tech.zg</groupId>
-    <artifactId>kobe-generator</artifactId>
+    <artifactId>webatis-generator</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
@@ -141,7 +141,7 @@
 
 
     <build>
-        <finalName>kobe</finalName>
+        <finalName>webatis-generator</finalName>
 
         <plugins>
             <plugin>
@@ -175,8 +175,8 @@
                     <useWildcardClassPath>true</useWildcardClassPath>
                     <daemons>
                         <daemon>
-                            <id>kobe</id>
-                            <mainClass>tech.zg.webatis.KobeApplication</mainClass>
+                            <id>webatis-generator</id>
+                            <mainClass>tech.zg.webatis.WebatisApplication</mainClass>
                             <commandLineArguments>
                                 <commandLineArgument>start</commandLineArgument>
                             </commandLineArguments>
@@ -201,7 +201,7 @@
                                         <!-- 文件存储路径和名称指定 -->
                                         <property>
                                             <name>wrapper.logfile</name>
-                                            <value>logs/product.YYYYMMDD.log</value>
+                                            <value>logs/webatis-generator.YYYYMMDD.log</value>
                                         </property>
                                         <!-- 按日期拆分文件 -->
                                         <property>

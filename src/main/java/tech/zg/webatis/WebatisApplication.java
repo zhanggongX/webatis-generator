@@ -12,12 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date:
  * @version: 1.0.0
  */
-@SpringBootApplication(scanBasePackages = "tech.zg.kobe")
+@SpringBootApplication(scanBasePackages = "tech.zg.webatis")
 @EnableAutoConfiguration
-@MapperScan(basePackages = {"tech.zg.kobe.mapper"}, sqlSessionFactoryRef = "masterSqlSessionFactory")
-public class KobeApplication {
+@MapperScan(basePackages = {"tech.zg.webatis.mapper"}, sqlSessionFactoryRef = "masterSqlSessionFactory")
+public class WebatisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KobeApplication.class, args);
+        SpringApplication.run(WebatisApplication.class, args);
     }
 }

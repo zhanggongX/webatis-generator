@@ -11,28 +11,28 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>target/generated-resources/appassembler/jsw/webatis/bin</directory>
-            <outputDirectory>kobe/bin</outputDirectory>
+            <directory>target/generated-resources/appassembler/jsw/webatis-generator/bin</directory>
+            <outputDirectory>webatis-generator/bin</outputDirectory>
             <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
-            <directory>target/generated-resources/appassembler/jsw/webatis/lib</directory>
-            <outputDirectory>webatis/lib</outputDirectory>
+            <directory>target/generated-resources/appassembler/jsw/webatis-generator/lib</directory>
+            <outputDirectory>webatis-generator/lib</outputDirectory>
             <includes>
                 <include>*.jar</include>
                 <include>libwrapper-linux*</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>target/generated-resources/appassembler/jsw/webatis/conf</directory>
-            <outputDirectory>webatis/conf</outputDirectory>
+            <directory>target/generated-resources/appassembler/jsw/webatis-generator/conf</directory>
+            <outputDirectory>webatis-generator/conf</outputDirectory>
             <includes>
                 <include>*</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>target/classes/</directory>
-            <outputDirectory>webatis/conf</outputDirectory>
+            <outputDirectory>webatis-generator/conf</outputDirectory>
             <includes>
                 <include>logback-spring.xml</include>
                 <include>application.yml</include>
@@ -44,11 +44,11 @@
         </fileSet>
         <fileSet>
             <directory>src/main/assembly/conf</directory>
-            <outputDirectory>webatis/conf</outputDirectory>
+            <outputDirectory>webatis-generator/conf</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>target/classes/filter</directory>
-            <outputDirectory>webatis/logs</outputDirectory>
+            <directory>target/classes/</directory>
+            <outputDirectory>webatis-generator/logs</outputDirectory>
             <excludes>
                 <exclude>**/*</exclude>
             </excludes>
