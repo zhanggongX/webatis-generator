@@ -4,10 +4,9 @@ package tech.zg.webatis.common;
  * 状态码
  * <p>
  * @author: 张弓
- * @date:
  * @version: 1.0.0
  */
-public enum  KobeCode {
+public enum WebatisCode {
 
     //0 到 5000 为系统通用预留
     SUCCESS("200", "成功"),
@@ -19,7 +18,7 @@ public enum  KobeCode {
     private String code;
     private String message;
 
-    KobeCode(String code, String message) {
+    WebatisCode(String code, String message) {
         this.code = code;
         this.message = message;
     }

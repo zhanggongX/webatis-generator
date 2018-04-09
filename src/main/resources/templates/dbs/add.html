@@ -3,7 +3,7 @@
 <head>
     <title>数据库表列表</title>
     <div th:replace="main::resources"></div>
-    <script src="../js/table/list.js"></script>
+    <script th:src="${_contextPath} + '/static/js/dbs/add.js'"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -11,21 +11,62 @@
     <div th:replace="main::menu"></div>
 
     <div class="layui-body">
-        <div style="padding: 15px;">添加数据库配置</div>
-        <form class="layui-form">
+        <div style="padding: 20px;">添加数据库配置</div>
+        <form class="layui-form layui-form-pane" style="padding: 50px;">
             <div class="layui-form-item">
-                <label class="layui-form-label">搜索表</label>
-                <div class="layui-input-block">
-                    <input id="tableName" lay-verify="title" autocomplete="off" placeholder="请输入表名" class="layui-input" type="text"/>
+                <label class="layui-form-label">数据库名称</label>
+                <div class="layui-input-inline">
+                    <input name="name" lay-verify="required" autocomplete="off" placeholder="请输入数据库名称" class="layui-input" type="text"/>
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <a class="layui-btn" id="submitBtn">搜索</a>
-                    <a id="genCode" class="layui-btn">生成数据</a>
+                <label class="layui-form-label">URL</label>
+                <div class="layui-input-inline">
+                    <input name="url" lay-verify="required" autocomplete="off" placeholder="192.168.1.1" class="layui-input" type="text"/>
                 </div>
             </div>
-            <table class="layui-hide" id="tableList" lay-filter="demo"></table>
+            <div class="layui-form-item">
+                <label class="layui-form-label">端口</label>
+                <div class="layui-input-inline">
+                    <input name="port" lay-verify="number" autocomplete="off" placeholder="3306" class="layui-input" type="text"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">数据库类型</label>
+                <div class="layui-input-inline">
+                    <select name="type" lay-verify="required">
+                        <option value=""></option>
+                        <option value="1">mysql</option>
+                        <option value="2" disabled="disabled">oracle</option>
+                    </select>
+                </div>
+                <div class="layui-form-mid layui-word-aux">目前只支持mysql</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input name="username" lay-verify="required" autocomplete="off" placeholder="root" class="layui-input" type="text"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input name="password" th:type="password" lay-verify="required" autocomplete="off" placeholder="password" class="layui-input" type="text"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">路径</label>
+                <div class="layui-input-inline">
+                    <input name="path" autocomplete="off" placeholder="tech.zg.xx" class="layui-input" type="text"/>
+                </div>
+                <div class="layui-form-mid layui-word-aux">生成的包路径</div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <button class="layui-btn" lay-submit="true" lay-filter="formSubmit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
         </form>
     </div>
     <div th:replace="main::appFooter"></div>

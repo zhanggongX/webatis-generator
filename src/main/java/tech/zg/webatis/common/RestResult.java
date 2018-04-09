@@ -27,7 +27,7 @@ public class RestResult extends HashMap<String, Object> implements Serializable 
 	 * @return RestResult
 	 */
 	public RestResult() {
-		put("code", KobeCode.SUCCESS.getCode());
+		put("code", WebatisCode.SUCCESS.getCode());
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class RestResult extends HashMap<String, Object> implements Serializable 
 	 * @return RestResult
 	 */
 	public static RestResult error() {
-		return error(KobeCode.FAIL.getCode(), KobeCode.FAIL.getMessage());
+		return error(WebatisCode.FAIL.getCode(), WebatisCode.FAIL.getMessage());
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class RestResult extends HashMap<String, Object> implements Serializable 
 	 * @return RestResult
 	 */
 	public static RestResult error(String msg) {
-		return error(KobeCode.FAIL.getCode(), msg);
+		return error(WebatisCode.FAIL.getCode(), msg);
 	}
 
 	/**
