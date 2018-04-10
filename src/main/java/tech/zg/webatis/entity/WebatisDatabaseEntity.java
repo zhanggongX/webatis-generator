@@ -1,6 +1,7 @@
 package tech.zg.webatis.entity;
 
 import tech.zg.webatis.entity.base.BaseEntity;
+import tech.zg.webatis.entity.base.WebatisEntity;
 
 /**
  * 数据库实体类
@@ -8,7 +9,7 @@ import tech.zg.webatis.entity.base.BaseEntity;
  * @author: 张弓
  * @version: 1.0.0
  */
-public class DatabaseEntity extends BaseEntity {
+public class WebatisDatabaseEntity extends WebatisEntity {
 
     private Integer id;
     /**
