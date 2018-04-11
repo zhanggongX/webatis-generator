@@ -98,4 +98,20 @@ layui.config({
         form.appendTo('body').submit().remove();
         console.log(form);
     }
+
+    form.on('select(dbsNameSel)', function(data){
+        console.log(data.value);
+        /*$.ajax({
+            url: "<%=path%>/getCityData",
+            dataType: 'json',
+            data: {
+                id: data.value
+            },
+            success: function (result) {
+                $("#city").html("");
+                $("#city").append(result.data);
+                form.render('select', 'city');
+            }
+        });*/
+    });
 });

@@ -75,6 +75,7 @@ public class GeneratorController {
     @RequestMapping("/listTableByPager")
     @ResponseBody
     public RestResult listByPager(@RequestParam Map<String, Object> params){
+        //todo 获取动态SqlSessionFactory
         Pager pager = PagerUtil.getPager(params);
         String tableName = (String) params.get("tableName");
         tableService.listByPager(pager, tableName);
@@ -85,6 +86,12 @@ public class GeneratorController {
         restResult.put("code", 0);
         return restResult;
     }
+
+    /*@RequestMapping("/getTables")
+    @ResponseBody
+    public RestResult getTables(){
+        return RestResult.success();
+    }*/
 
     /**
      * 进入列表页
