@@ -5,14 +5,15 @@
 <div th:fragment="resources">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <link rel="stylesheet" href="../layui/css/layui.css"/>
-    <script src="../layui/layui.js"></script>
     <script type="text/javascript" th:inline="javascript">
         var _appDomain = [[${_appDomain}]];
         var _contextPath = [[${_contextPath}]];
         var _contextPathUri = _appDomain + _contextPath;
         var _version = [[${_version}]] || "V1.0.0";
     </script>
+    <link rel="stylesheet" th:href="${_contextPath} + '/layui/css/layui.css'"/>
+    <script th:src="${_contextPath} + '/layui/layui.js'"></script>
+    <script th:src="${_contextPath} + '/static/js/main.js'"></script>
 </div>
 
 <div class="layui-header" th:fragment="navbar" id="topbar">
@@ -35,7 +36,7 @@
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
             <a href="javascript:;">
-                <img src="http://t.cn/RCzsdCq" class="layui-nav-img"/>
+                <img src="" class="layui-nav-img"/>
                 张弓
             </a>
             <dl class="layui-nav-child">
@@ -53,16 +54,19 @@
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree"  lay-filter="test">
             <li class="layui-nav-item layui-nav-itemed">
-                <a class="" href="javascript:;">数据库配置</a>
+                <a class="" th:href="${_contextPath}+ '/dbs/list'">首页</a>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">数据库管理</a>
                 <dl class="layui-nav-child">
                     <!--<dd><a href="/dbs/add">添加数据库</a></dd>-->
-                    <dd><a th:href="${_contextPath}+ '/dbs/add'">添加数据库</a></dd>
+                    <dd><a th:href="${_contextPath}+ '/dbs/list'">数据库列表</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item layui-nav-itemed">
                 <a class="" href="javascript:;">代码生成</a>
                 <dl class="layui-nav-child">
-                    <dd><a th:href="${_contextPath}+ '/table/list'">数据表列表</a></dd>
+                    <dd><a th:href="${_contextPath}+ '/gen/tableList'">选择数据表</a></dd>
                 </dl>
             </li>
         </ul>

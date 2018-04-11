@@ -20,6 +20,7 @@ layui.config({
             ,{field: 'url', title: '数据库链接'}
             ,{field: 'port', title: '数据库端口'}
             ,{field: 'type', title: '数据库类型'}
+            ,{field: 'path', title: '生成包路径'}
             ,{field: 'updatedAt', title: '最后更新时间', sort: true}
             ,{fixed: 'right', width:150, align:'center', toolbar: '#dbListTool'}
         ]]
@@ -44,7 +45,7 @@ layui.config({
         var tr = obj.tr; //获得当前行 tr 的DOM对象
 
         if(layEvent === 'del'){ //删除
-            layer.confirm('真的删除行么', function(index){
+            layer.confirm('真的要删除这个数据库吗', function(index){
                 $.ajax({
                     type: 'GET',
                     url: _contextPath+"/dbs/deleted/"+obj.data.id,
@@ -62,23 +63,37 @@ layui.config({
                 layer.close(index);
             });
         } else if(layEvent === 'edit'){ //编辑
-            //do something
-            /*layer.open({
-                type: 1,
-                content: '传入任意的文本或html' //这里content是一个普通的String
-            });*/
             layer.open({
                 type: 2,
-                content: 'http://sentsin.com' //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                title: '编辑数据库',
+                content: _contextPath + '/dbs/details/'+obj.data.id,
+                area: ['800px', '650px'],
+                anim: 6,
+                btn: ['关闭'],
+                yes: function(index, layero){
+                    //如果设定了yes回调，需进行手工关闭
+                    layer.close(index);
+                    //重新访问，刷新列表
+                    window.location = _contextPath + '/dbs/list';
+                }
             });
-            //同步更新缓存对应的值
-            /*obj.update({
-                username: '123'
-                ,title: 'xxx'
-            });*/
         }
     });
 
-
-
+    $("#addBtn").click(function () {
+        layer.open({
+            type: 2,
+            title: '新增数据库',
+            content: _contextPath + '/dbs/add/',
+            area: ['800px', '650px'],
+            anim: 6,
+            btn: ['关闭'],
+            yes: function(index, layero){
+                //如果设定了yes回调，需进行手工关闭
+                layer.close(index);
+                //重新访问，刷新列表
+                window.location = _contextPath + '/dbs/list';
+            }
+        });
+    });
 });

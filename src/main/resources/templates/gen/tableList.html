@@ -3,7 +3,7 @@
 <head>
     <title>数据库表列表</title>
     <div th:replace="main::resources"></div>
-    <script src="../js/table/list.js"></script>
+    <script th:src="${_contextPath} + '/static/js/gen/tableList.js'"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -14,12 +14,14 @@
         <div style="padding: 15px;">数据表</div>
         <form class="layui-form">
             <div class="layui-form-item">
-                <label class="layui-form-label">搜索表</label>
-                <div class="layui-input-block">
+                <label class="layui-form-label">选择数据库</label>
+                <div class="layui-input-inline">
                     <input id="tableName" lay-verify="title" autocomplete="off" placeholder="请输入表名" class="layui-input" type="text"/>
                 </div>
-            </div>
-            <div class="layui-form-item">
+                <label class="layui-form-label">搜索表</label>
+                <div class="layui-input-inline">
+                    <input id="databaseSelect" lay-verify="title" autocomplete="off" placeholder="请输入表名" class="layui-input" type="text"/>
+                </div>
                 <div class="layui-input-block">
                     <a class="layui-btn" id="submitBtn">搜索</a>
                     <a id="genCode" class="layui-btn">生成数据</a>

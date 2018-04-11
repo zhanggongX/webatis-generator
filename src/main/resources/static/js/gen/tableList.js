@@ -12,7 +12,7 @@ layui.config({
         id: 'tableList'
         ,elem: '#tableList'
         ,height: 332
-        ,url: 'listByPager'
+        ,url: _contextPath + '/gen/listTableByPager'
         ,page: true
         ,cols: [[
             {checkbox: true}

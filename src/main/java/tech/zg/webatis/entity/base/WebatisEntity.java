@@ -1,5 +1,9 @@
 package tech.zg.webatis.entity.base;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 /**
  * 类说明
  * <p>
@@ -9,8 +13,10 @@ package tech.zg.webatis.entity.base;
 public class WebatisEntity extends BaseEntity{
 
     private Integer deleted;
-    private String createdAt;
-    private String updatedAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updatedAt;
 
     public Integer getDeleted() {
         return deleted;
@@ -20,19 +26,19 @@ public class WebatisEntity extends BaseEntity{
         this.deleted = deleted;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

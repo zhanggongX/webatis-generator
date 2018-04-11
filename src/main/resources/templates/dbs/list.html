@@ -22,6 +22,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <a class="layui-btn" id="submitBtn">搜索</a>
+                    <a class="layui-btn" id="addBtn">添加数据库</a>
                 </div>
             </div>
             <table class="layui-hide" id="dbList" lay-filter="dbList"></table>
@@ -33,6 +34,11 @@
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
+    <!--{field:'type', title: '类型', width: 200, templet: '#titleTpl'}
+
+    <script type="text/html" id="titleTpl">
+        if({{d.type}}=='2'){机构}else if({{d.type}}=='3'){财务}
+    </script>-->
 </div>
 </body>
 </html>

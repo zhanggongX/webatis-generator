@@ -45,6 +45,14 @@
         order by w.updated_at desc
     </select>
 
+    <select id="get" resultMap="ColumnEntityMap" parameterType="java.lang.Integer">
+        select
+        <include refid="SelectColumnSql"/>
+        from webatis_databases w
+        where w.deleted = 0
+        and w.id = #{id, jdbcType=INTEGER}
+    </select>
+
     <insert id="save" parameterType="tech.zg.webatis.entity.WebatisDatabaseEntity" useGeneratedKeys="true" keyProperty="id">
         insert into webatis_databases
         (
@@ -67,6 +75,20 @@
             #{path}
         )
     </insert>
+
+    <update id="update" parameterType="tech.zg.webatis.entity.WebatisDatabaseEntity">
+		update webatis_databases
+		<set>
+			<if test="name != null">`name` = #{name, jdbcType=VARCHAR}, </if>
+			<if test="url != null">`url` = #{url, jdbcType=VARCHAR}, </if>
+			<if test="port != null">`port` = #{port, jdbcType=INTEGER}, </if>
+			<if test="type != null">`type` = #{type, jdbcType=INTEGER}, </if>
+			<if test="username != null">`username` = #{username, jdbcType=VARCHAR}, </if>
+			<if test="password != null">`password` = #{password, jdbcType=VARCHAR}, </if>
+			<if test="path != null">`path` = #{path, jdbcType=VARCHAR}, </if>
+		</set>
+		where id = #{id}
+	</update>
 
     <update id="remove" parameterType="java.lang.Integer">
         update webatis_databases

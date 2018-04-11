@@ -30,6 +30,8 @@ public class WebatisDatabaseController {
 
     @RequestMapping("/add")
     public ModelAndView add(ModelAndView mv) {
+        mv.addObject("webatisDatabase", new WebatisDatabaseEntity());
+        mv.addObject("opType", "save");
         mv.setViewName("/dbs/add");
         return mv;
     }
@@ -50,6 +52,33 @@ public class WebatisDatabaseController {
             RestResult.error("保存失败");
         }
         return RestResult.success();
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public RestResult update(@RequestBody WebatisDatabaseEntity databaseEntity) {
+        try {
+            webatisDatabaseService.update(databaseEntity);
+        } catch (BaseException e) {
+            logger.error("更新失败:{}", e);
+            RestResult.error("更新失败");
+        }
+        return RestResult.success();
+    }
+
+    @RequestMapping("/details/{id}")
+    public ModelAndView details(@PathVariable Integer id, ModelAndView mv) {
+        WebatisDatabaseEntity webatisDatabaseEntity = null;
+        try {
+            webatisDatabaseEntity = webatisDatabaseService.get(id);
+        } catch (BaseException e) {
+            logger.error("保存失败:{}", e);
+            RestResult.error("保存失败");
+        }
+        mv.addObject("webatisDatabase", webatisDatabaseEntity);
+        mv.addObject("opType", "update");
+        mv.setViewName("/dbs/add");
+        return mv;
     }
 
     @RequestMapping("/listByPager")

@@ -28,10 +28,10 @@ import java.util.Map;
  * @version: 1.0.0
  */
 @Controller
-@RequestMapping("/table")
-public class TableController {
+@RequestMapping("/gen")
+public class GeneratorController {
 
-    Logger LOGGER = LoggerFactory.getLogger(TableController.class);
+    Logger LOGGER = LoggerFactory.getLogger(GeneratorController.class);
 
     @Autowired
     private TableService tableService;
@@ -72,7 +72,7 @@ public class TableController {
      * @param params 参数
      * @return RestResult
      */
-    @RequestMapping("/listByPager")
+    @RequestMapping("/listTableByPager")
     @ResponseBody
     public RestResult listByPager(@RequestParam Map<String, Object> params){
         Pager pager = PagerUtil.getPager(params);
@@ -96,9 +96,9 @@ public class TableController {
      * @param mv
      * @return ModelAndView
      */
-    @RequestMapping("/list")
+    @RequestMapping("/tableList")
     public ModelAndView list(ModelAndView mv){
-        mv.setViewName("/table/list");
+        mv.setViewName("/gen/tableList");
         return mv;
     }
 }
