@@ -19,7 +19,7 @@ layui.config({
             ,{field: 'name', title: '数据库名'}
             ,{field: 'url', title: '数据库链接'}
             ,{field: 'port', title: '数据库端口'}
-            ,{field: 'type', title: '数据库类型'}
+            ,{field: 'type', title: '数据库类型', templet:'#databaseType'}
             ,{field: 'path', title: '生成包路径'}
             ,{field: 'updatedAt', title: '最后更新时间', sort: true}
             ,{fixed: 'right', width:150, align:'center', toolbar: '#dbListTool'}
