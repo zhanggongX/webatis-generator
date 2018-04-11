@@ -10,6 +10,8 @@ import tech.zg.webatis.pager.PagerHelper;
 import tech.zg.webatis.service.WebatisDatabaseService;
 import tech.zg.webatis.service.base.impl.BaseServiceImpl;
 
+import java.util.List;
+
 /**
  * 数据库服务
  * <p>
@@ -31,5 +33,10 @@ public class WebatisDatabaseServiceImpl extends BaseServiceImpl<Integer, Webatis
         PagerHelper.startPage(pager);
         webatisDatabaseMapper.list(dbsName);
         return pager;
+    }
+
+    @Override
+    public List<WebatisDatabaseEntity> list() {
+        return webatisDatabaseMapper.list(null);
     }
 }

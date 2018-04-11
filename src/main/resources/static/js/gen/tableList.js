@@ -8,6 +8,31 @@ layui.config({
     $ = layui.jquery,
     form = layui.form;
 
+    //加载数据库
+    $.ajax({
+        type: 'POST',
+        url: _contextPath+"/dbs/listAll",
+        contentType: "application/json;charset=utf-8",
+        success: function (result) {
+            if(result.code == 200){
+                var vhtml = '<option value=""></option>';
+                var result = JSON.parse(JSON.stringify(result.webatisDatabases));
+                if(result.length >0 ){
+                    for(var i=0; i<result.length; i++){
+                        vhtml += '<option value="' + result[i].id + '">' + result[i].name +'</option>';
+                    }
+                }
+                console.log(vhtml);
+                $("#dbsName").html("");
+                $("#dbsName").append(vhtml);
+                form.render('select', 'dbsName');
+            }else {
+                layer.msg(result.message);
+            }
+        },
+        dataType: "json"
+    });
+
     table.render({
         id: 'tableList'
         ,elem: '#tableList'
@@ -73,5 +98,4 @@ layui.config({
         form.appendTo('body').submit().remove();
         console.log(form);
     }
-
 });

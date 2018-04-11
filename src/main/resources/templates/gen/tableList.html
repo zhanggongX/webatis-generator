@@ -15,19 +15,23 @@
         <form class="layui-form">
             <div class="layui-form-item">
                 <label class="layui-form-label">选择数据库</label>
-                <div class="layui-input-inline">
-                    <input id="tableName" lay-verify="title" autocomplete="off" placeholder="请输入表名" class="layui-input" type="text"/>
+                <div class="layui-input-inline layui-form" lay-filter="dbsName">
+                    <select id="dbsName" name="dbsName" lay-filter="dbsNameSel">
+                        <option value=""></option>
+                    </select>
                 </div>
                 <label class="layui-form-label">搜索表</label>
                 <div class="layui-input-inline">
-                    <input id="databaseSelect" lay-verify="title" autocomplete="off" placeholder="请输入表名" class="layui-input" type="text"/>
+                    <input id="tableName" lay-verify="title" autocomplete="off" placeholder="请输入表名" class="layui-input" type="text"/>
                 </div>
-                <div class="layui-input-block">
+                <div class="layui-input-inline">
                     <a class="layui-btn" id="submitBtn">搜索</a>
-                    <a id="genCode" class="layui-btn">生成数据</a>
                 </div>
             </div>
-            <table class="layui-hide" id="tableList" lay-filter="demo"></table>
+            <div class="layui-input-block">
+                <a id="genCode" class="layui-btn">生成数据</a>
+            </div>
+            <table class="layui-hide" id="tableList" lay-filter="tableList"></table>
         </form>
     </div>
     <div th:replace="main::appFooter"></div>

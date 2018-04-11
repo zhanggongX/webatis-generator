@@ -4,6 +4,8 @@ import tech.zg.webatis.entity.WebatisDatabaseEntity;
 import tech.zg.webatis.pager.Pager;
 import tech.zg.webatis.service.base.BaseService;
 
+import java.util.List;
+
 /**
  * 数据库服务
  * <p>
@@ -12,4 +14,5 @@ import tech.zg.webatis.service.base.BaseService;
  */
 public interface WebatisDatabaseService extends BaseService<Integer, WebatisDatabaseEntity>{
     Pager listByPager(Pager pager, String dbsName);
+    List<WebatisDatabaseEntity> list();
 }

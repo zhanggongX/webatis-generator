@@ -13,6 +13,7 @@ import tech.zg.webatis.pager.Pager;
 import tech.zg.webatis.pager.PagerUtil;
 import tech.zg.webatis.service.WebatisDatabaseService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -95,7 +96,7 @@ public class WebatisDatabaseController {
         return restResult;
     }
 
-    @RequestMapping("deleted/{id}")
+    @RequestMapping("/deleted/{id}")
     @ResponseBody
     public RestResult deleted(@PathVariable Integer id){
         try {
@@ -106,6 +107,13 @@ public class WebatisDatabaseController {
             RestResult.error("删除失败");
         }
         return RestResult.success();
+    }
+
+    @RequestMapping("/listAll")
+    @ResponseBody
+    public RestResult listAll(){
+        List<WebatisDatabaseEntity> webatisDatabaseEntityList = webatisDatabaseService.list();
+        return RestResult.success().put("webatisDatabases", webatisDatabaseEntityList);
     }
 
 }
