@@ -32,13 +32,13 @@ public class WebatisDatabaseController {
     public ModelAndView add(ModelAndView mv) {
         mv.addObject("webatisDatabase", new WebatisDatabaseEntity());
         mv.addObject("opType", "save");
-        mv.setViewName("/dbs/add");
+        mv.setViewName("/dbs/dbsAdd");
         return mv;
     }
 
     @RequestMapping("/list")
     public ModelAndView list(ModelAndView mv) {
-        mv.setViewName("/dbs/list");
+        mv.setViewName("/dbs/dbsList");
         return mv;
     }
 
@@ -77,7 +77,7 @@ public class WebatisDatabaseController {
         }
         mv.addObject("webatisDatabase", webatisDatabaseEntity);
         mv.addObject("opType", "update");
-        mv.setViewName("/dbs/add");
+        mv.setViewName("/dbs/dbsAdd");
         return mv;
     }
 
