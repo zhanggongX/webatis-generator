@@ -7,8 +7,8 @@
     <groupId>tech.zg</groupId>
     <artifactId>webatis-generator</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <name>webatis-generator</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,80 +16,11 @@
         <version>1.5.3.RELEASE</version>
     </parent>
 
-    <properties>
-        <mybatis.spring.boot.version>1.3.0</mybatis.spring.boot.version>
-        <mysql.version>5.1.38</mysql.version>
-        <druid.version>1.0.28</druid.version>
-        <commons.lang.version>2.6</commons.lang.version>
-        <commons.io.version>2.5</commons.io.version>
-        <commons.configuration.version>1.10</commons.configuration.version>
-        <fastjson.version>1.2.31</fastjson.version>
-        <velocity.version>1.7</velocity.version>
-        <spring.boot.maven.plugin.version>1.5.1.RELEASE</spring.boot.maven.plugin.version>
-        <!--下边两个参数spring-boot-maven-plugin插件使用-->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${commons.lang.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons.io.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <version>${commons.configuration.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-        <dependency>
-            <artifactId>velocity</artifactId>
-            <groupId>org.apache.velocity</groupId>
-            <version>${velocity.version}</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>webaits-entity</module>
+        <module>webatis-service</module>
+        <module>webatis-web</module>
+    </modules>
 
     <profiles>
         <profile>
@@ -115,6 +46,7 @@
         </profile>
     </profiles>
 
+    <!--使用阿里云的仓库-->
     <repositories>
         <repository>
             <id>public</id>
@@ -139,154 +71,241 @@
         </pluginRepository>
     </pluginRepositories>
 
-
-    <build>
-        <finalName>webatis-generator</finalName>
-
-        <plugins>
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.5</version>
-            </plugin>
-            <plugin>
+    <!--项目版本管理-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.release.version>2.4.1</maven.release.version>
+        <maven.compiler.version>3.1</maven.compiler.version>
+        <!-- java 版本 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- maven 版本 -->
+        <maven.deploy.version>2.7</maven.deploy.version>
+        <maven.sourcce.version>2.2.1</maven.sourcce.version>
+        <!-- spring framework -->
+        <spring.version>4.3.11.RELEASE</spring.version>
+        <spring.boot.version>1.5.7.RELEASE</spring.boot.version>
+        <!-- thymeleaf -->
+        <thymeleaf.version>3.0.7.RELEASE</thymeleaf.version>
+        <thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
+        <!-- mysql -->
+        <mysql.version>5.1.42</mysql.version>
+        <!-- mybatis -->
+        <mybatis.spring.boot.version>1.3.1</mybatis.spring.boot.version>
+        <!-- druid 数据库连接池-->
+        <druid.version>1.0.26</druid.version>
+        <!-- commons pool2 -->
+        <commons-pool2.version>2.4.2</commons-pool2.version>
+        <!-- alibaba fastjson -->
+        <fastjson.version>1.2.35</fastjson.version>
+        <!-- guaba -->
+        <guava.version>19.0</guava.version>
+        <!-- jackson -->
+        <jackson.version>2.8.10</jackson.version>
+        <!-- slf4j -->
+        <org.slf4j.version>1.7.25</org.slf4j.version>
+        <!-- commons-lang -->
+        <commons-lang.version>2.6</commons-lang.version>
+        <!-- pinyin4j -->
+        <pinyin4j.version>2.5.0</pinyin4j.version>
+        <!-- hibernate validator-->
+        <hibernate.validator.version>5.3.5.Final</hibernate.validator.version>
+        <!-- logback-->
+        <logback.version>1.1.11</logback.version>
+        <c3p0.version>0.9.5.2</c3p0.version>
+    </properties>
+    <!--项目依赖管理-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot -->
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <!-- 解决资源文件的编码问题 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+                <artifactId>spring-boot</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jetty</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-undertow</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
 
-            <!-- assembler 打包 -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>2.0.0</version>
-                <configuration>
-                    <repositoryLayout>flat</repositoryLayout>
-                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
-                    <configurationDirectory>conf</configurationDirectory>
-                    <useWildcardClassPath>true</useWildcardClassPath>
-                    <daemons>
-                        <daemon>
-                            <id>webatis-generator</id>
-                            <mainClass>tech.zg.webatis.WebatisApplication</mainClass>
-                            <commandLineArguments>
-                                <commandLineArgument>start</commandLineArgument>
-                            </commandLineArguments>
-                            <platforms>
-                                <platform>jsw</platform>
-                            </platforms>
-                            <generatorConfigurations>
-                                <generatorConfiguration>
-                                    <generator>jsw</generator>
-                                    <includes>
-                                        <include>linux-x86-64</include>
-                                    </includes>
-                                    <configuration>
-                                        <property>
-                                            <name>configuration.directory.in.classpath.first</name>
-                                            <value>conf</value>
-                                        </property>
-                                        <property>
-                                            <name>set.default.REPO_DIR</name>
-                                            <value>lib</value>
-                                        </property>
-                                        <!-- 文件存储路径和名称指定 -->
-                                        <property>
-                                            <name>wrapper.logfile</name>
-                                            <value>logs/webatis-generator.YYYYMMDD.log</value>
-                                        </property>
-                                        <!-- 按日期拆分文件 -->
-                                        <property>
-                                            <name>wrapper.logfile.rollmode</name>
-                                            <value>DATE</value>
-                                        </property>
-                                        <!-- 单个日志文件最大存储现在 -->
-                                        <property>
-                                            <name>wrapper.logfile.maxsize</name>
-                                            <value>200m</value>
-                                        </property>
-                                        <!-- 日志文件的数量限制，0无限制 -->
-                                        <property>
-                                            <name>wrapper.logfile.maxfiles</name>
-                                            <value>7</value>
-                                        </property>
-                                        <!-- 日志等级 -->
-                                        <property>
-                                            <name>wrapper.logfile.loglevel</name>
-                                            <value>ERROR</value>
-                                        </property>
-                                    </configuration>
-                                </generatorConfiguration>
-                            </generatorConfigurations>
-
-                            <!-- JVM 设置 -->
-                            <jvmSettings>
-                                <!-- 系统环境变量 -->
-                                <extraArguments>
-                                    <extraArgument>-Xmx8192M</extraArgument>
-                                    <extraArgument>-Xms8192M</extraArgument>
-                                    <extraArgument>-Xmn4096M</extraArgument>
-                                    <extraArgument>-Xss512k</extraArgument>
-                                    <extraArgument>-server </extraArgument>
-                                    <extraArgument>-XX:MaxPermSize=256M</extraArgument>
-                                    <extraArgument>-XX:-UseBiasedLocking</extraArgument>
-                                    <extraArgument>-XX:MaxDirectMemorySize=4G</extraArgument>
-                                    <extraArgument>-XX:+UseConcMarkSweepGC</extraArgument>
-                                    <extraArgument>-XX:CMSFullGCsBeforeCompaction=5</extraArgument>
-                                    <extraArgument>-XX:+UseCMSCompactAtFullCollection</extraArgument>
-                                    <extraArgument>-XX:+CMSClassUnloadingEnabled</extraArgument>
-                                    <extraArgument>-XX:CMSInitiatingOccupancyFraction=75</extraArgument>
-                                    <extraArgument>-XX:+UseCMSInitiatingOccupancyOnly</extraArgument>
-                                </extraArguments>
-                            </jvmSettings>
-                        </daemon>
-                    </daemons>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-jsw-scripts</id>
-                        <phase>package</phase>
-
-                        <goals>
-                            <goal>generate-daemons</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- 载入 assembler 配置 -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/assembly-linux.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+            <!--springframework dependency-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!--thymeleaf dependency-->
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf-spring4</artifactId>
+                <version>${thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>${thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nz.net.ultraq.thymeleaf</groupId>
+                <artifactId>thymeleaf-layout-dialect</artifactId>
+                <version>${thymeleaf-layout-dialect.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+            <!-- alibaba -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!--commons-lang -->
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+            <!--pinyin4j -->
+            <dependency>
+                <groupId>com.belerweb</groupId>
+                <artifactId>pinyin4j</artifactId>
+                <version>${pinyin4j.version}</version>
+            </dependency>
+            <!--hibernate validator-->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate.validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${c3p0.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
