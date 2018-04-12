@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    #active: ${env}
+    active: dev
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  resources:
+    static-locations: classpath:/static/,classpath:/views/,classpath:/layui
+
+#Tomcat
+server:
+  context-path: /webatis
+  port: 8888
+  tomcat:
+    max-threads: 10
+    min-spare-threads: 10
+
+#Mybatis配置
+mybatis:
+  mapperLocations: classpath:mapper/**/*.xml
+  typeAliasesPackage: tech.zg.webatis.entity
+  configLocation: classpath:mybatis-config.xml
+
+#LogBack
+logback:
+  level: INFO

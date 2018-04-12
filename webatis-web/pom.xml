@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>tech.zg</groupId>
+        <artifactId>webatis-generator</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <packaging>jar</packaging>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>webatis-web</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>tech.zg</groupId>
+            <artifactId>webatis-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>webatis-generator</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- 解决资源文件的编码问题 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- assembler 打包 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <configuration>
+                    <repositoryLayout>flat</repositoryLayout>
+                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                    <configurationDirectory>conf</configurationDirectory>
+                    <useWildcardClassPath>true</useWildcardClassPath>
+                    <daemons>
+                        <daemon>
+                            <id>webatis-generator</id>
+                            <mainClass>tech.zg.webatis.WebatisApplication</mainClass>
+                            <commandLineArguments>
+                                <commandLineArgument>start</commandLineArgument>
+                            </commandLineArguments>
+                            <platforms>
+                                <platform>jsw</platform>
+                            </platforms>
+                            <generatorConfigurations>
+                                <generatorConfiguration>
+                                    <generator>jsw</generator>
+                                    <includes>
+                                        <include>linux-x86-64</include>
+                                    </includes>
+                                    <configuration>
+                                        <property>
+                                            <name>configuration.directory.in.classpath.first</name>
+                                            <value>conf</value>
+                                        </property>
+                                        <property>
+                                            <name>set.default.REPO_DIR</name>
+                                            <value>lib</value>
+                                        </property>
+                                        <!-- 文件存储路径和名称指定 -->
+                                        <property>
+                                            <name>wrapper.logfile</name>
+                                            <value>logs/webatis-generator.YYYYMMDD.log</value>
+                                        </property>
+                                        <!-- 按日期拆分文件 -->
+                                        <property>
+                                            <name>wrapper.logfile.rollmode</name>
+                                            <value>DATE</value>
+                                        </property>
+                                        <!-- 单个日志文件最大存储现在 -->
+                                        <property>
+                                            <name>wrapper.logfile.maxsize</name>
+                                            <value>200m</value>
+                                        </property>
+                                        <!-- 日志文件的数量限制，0无限制 -->
+                                        <property>
+                                            <name>wrapper.logfile.maxfiles</name>
+                                            <value>7</value>
+                                        </property>
+                                        <!-- 日志等级 -->
+                                        <property>
+                                            <name>wrapper.logfile.loglevel</name>
+                                            <value>ERROR</value>
+                                        </property>
+                                    </configuration>
+                                </generatorConfiguration>
+                            </generatorConfigurations>
+
+                            <!-- JVM 设置 -->
+                            <jvmSettings>
+                                <!-- 系统环境变量 -->
+                                <extraArguments>
+                                    <extraArgument>-Xmx8192M</extraArgument>
+                                    <extraArgument>-Xms8192M</extraArgument>
+                                    <extraArgument>-Xmn4096M</extraArgument>
+                                    <extraArgument>-Xss512k</extraArgument>
+                                    <extraArgument>-server </extraArgument>
+                                    <extraArgument>-XX:MaxPermSize=256M</extraArgument>
+                                    <extraArgument>-XX:-UseBiasedLocking</extraArgument>
+                                    <extraArgument>-XX:MaxDirectMemorySize=4G</extraArgument>
+                                    <extraArgument>-XX:+UseConcMarkSweepGC</extraArgument>
+                                    <extraArgument>-XX:CMSFullGCsBeforeCompaction=5</extraArgument>
+                                    <extraArgument>-XX:+UseCMSCompactAtFullCollection</extraArgument>
+                                    <extraArgument>-XX:+CMSClassUnloadingEnabled</extraArgument>
+                                    <extraArgument>-XX:CMSInitiatingOccupancyFraction=75</extraArgument>
+                                    <extraArgument>-XX:+UseCMSInitiatingOccupancyOnly</extraArgument>
+                                </extraArguments>
+                            </jvmSettings>
+                        </daemon>
+                    </daemons>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-jsw-scripts</id>
+                        <phase>package</phase>
+
+                        <goals>
+                            <goal>generate-daemons</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 载入 assembler 配置 -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/assembly-linux.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

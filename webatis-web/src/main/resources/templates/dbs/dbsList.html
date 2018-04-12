@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>数据库表列表</title>
+    <div th:replace="main::resources"></div>
+    <script th:src="${_contextPath} + '/static/js/dbs/dbsList.js'"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="main::navbar"></div>
+    <div th:replace="main::menu"></div>
+
+    <div class="layui-body">
+        <div style="padding: 15px;">数据库列表</div>
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">搜索数据库</label>
+                <div class="layui-input-block">
+                    <input id="dbsName" lay-verify="title" autocomplete="off" placeholder="请输入数据库名" class="layui-input" type="text"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <a class="layui-btn" id="submitBtn">搜索</a>
+                    <a class="layui-btn" id="addBtn">添加数据库</a>
+                </div>
+            </div>
+            <table class="layui-hide" id="dbList" lay-filter="dbList"></table>
+        </form>
+    </div>
+    <div th:replace="main::appFooter"></div>
+
+    <script type="text/html" id="dbListTool">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <script type="text/html" id="databaseType">
+        {{#  if( d.type ==1){ }}
+        {{ 'mysql' }}
+        {{#  }  }}
+        {{#  if( d.type ==2){ }}
+        {{ 'oracle' }}
+        {{#  }  }}
+    </script>
+</div>
+</body>
+</html>
