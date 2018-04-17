@@ -16,6 +16,7 @@ layui.config({
         ,page: true
         ,cols: [[
             {checkbox: true}
+            ,{field: 'defineName', title: '自定义名称'}
             ,{field: 'name', title: '数据库名'}
             ,{field: 'url', title: '数据库链接'}
             ,{field: 'port', title: '数据库端口'}

@@ -11,6 +11,7 @@ import tech.zg.webatis.entity.base.WebatisEntity;
 public class WebatisDatabaseEntity extends WebatisEntity {
 
     private Integer id;
+    private String defineName;
     /**
      * 数据库名称
      */
@@ -46,6 +47,14 @@ public class WebatisDatabaseEntity extends WebatisEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getDefineName() {
+        return defineName;
+    }
+
+    public void setDefineName(String defineName) {
+        this.defineName = defineName;
     }
 
     public String getName() {

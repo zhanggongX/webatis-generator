@@ -4,6 +4,7 @@ import tech.zg.webatis.bean.ColumnBean;
 import tech.zg.webatis.bean.TableBean;
 import tech.zg.webatis.pager.Pager;
 
+import java.beans.PropertyVetoException;
 import java.util.List;
 
 /**
@@ -35,11 +36,11 @@ public interface GeneratorService{
      * @date:
      * @version: 1.0.0
      *
-     * @param pager 分页信息
      * @param tableName 表名
+     * @param dbId 数据库id
      * @return Pager
      */
-    Pager listByPager(Pager pager, String tableName);
+    Pager list(Integer dbId, String tableName) throws PropertyVetoException;
 
     /**
      * 通过表名，查询表信息

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,40 +73,16 @@ public class GeneratorController {
      * @param params 参数
      * @return RestResult
      */
-    @RequestMapping("/listTableByPager")
+    @RequestMapping("/listTableByPager/{dbId}")
     @ResponseBody
-    public RestResult listByPager(@RequestParam Map<String, Object> params){
-        //todo 获取动态SqlSessionFactory
-        /*PooledDataSource pooled = new PooledDataSource();
-        pooled.setDriver("com.mysql.jdbc.Driver");
-        pooled.setUrl("");
-        pooled.setUsername("");
-        pooled.setPassword("");
-        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        Environment environment = new Environment("mysql", transactionFactory, pooled);
-        Configuration configuration = new Configuration(environment);
-        configuration.addMapper(String.class);
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(configuration);
-        SqlSession sqlSession = factory.openSession();
-        //sqlSession.select();*/
-
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        dataSource.setUser("");
-        dataSource.setPassword("");
-        dataSource.setJdbcUrl("");
-        try {
-            dataSource.setDriverClass("");
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }
-        dataSource.setInitialPoolSize(1);
-        dataSource.setMaxPoolSize(10);
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        //jdbcTemplate.
-
+    public RestResult listByPager(@PathVariable Integer dbId, @RequestParam Map<String, Object> params){
         Pager pager = PagerUtil.getPager(params);
         String tableName = (String) params.get("tableName");
-        generatorService.listByPager(pager, tableName);
+        try {
+            generatorService.listByPager(pager, dbId, tableName);
+        } catch (PropertyVetoException e) {
+
+        }
         RestResult restResult = RestResult.success();
         //为了兼容layui
         restResult.put("count", pager.getTotalCount());
@@ -113,12 +90,6 @@ public class GeneratorController {
         restResult.put("code", 0);
         return restResult;
     }
-
-    /*@RequestMapping("/getTables")
-    @ResponseBody
-    public RestResult getTables(){
-        return RestResult.success();
-    }*/
 
     /**
      * 进入列表页

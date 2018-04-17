@@ -8,4 +8,6 @@ package tech.zg.webatis.common;
  */
 public class WebatisConstants {
 
+    public static final Integer MYSQL = 1;
+    public static final Integer ORACLE = 2;
 }

@@ -19,33 +19,19 @@ layui.config({
                 var result = JSON.parse(JSON.stringify(result.webatisDatabases));
                 if(result.length >0 ){
                     for(var i=0; i<result.length; i++){
-                        vhtml += '<option value="' + result[i].id + '">' + result[i].name +'</option>';
+                        vhtml += '<option value="' + result[i].id + '">' + result[i].defineName +'</option>';
                     }
                 }
-                console.log(vhtml);
+                //console.log(vhtml);
                 $("#dbsName").html("");
                 $("#dbsName").append(vhtml);
                 form.render('select', 'dbsName');
+                layer.msg("请选择数据库!");
             }else {
                 layer.msg(result.message);
             }
         },
         dataType: "json"
-    });
-
-    table.render({
-        id: 'tableList'
-        ,elem: '#tableList'
-        ,height: 332
-        ,url: _contextPath + '/gen/listTableByPager'
-        ,page: true
-        ,cols: [[
-            {checkbox: true}
-            ,{field: 'tableName', title: '表名'}
-            ,{field: 'engine', title: 'engine'}
-            ,{field: 'tableComment', title: '备注'}
-            ,{field: 'createTime', title: '创建时间', sort: true}
-        ]]
     });
 
     $("#submitBtn").click(function () {
@@ -100,18 +86,19 @@ layui.config({
     }
 
     form.on('select(dbsNameSel)', function(data){
-        console.log(data.value);
-        /*$.ajax({
-            url: "<%=path%>/getCityData",
-            dataType: 'json',
-            data: {
-                id: data.value
-            },
-            success: function (result) {
-                $("#city").html("");
-                $("#city").append(result.data);
-                form.render('select', 'city');
-            }
-        });*/
+        table.render({
+            id: 'tableList'
+            ,elem: '#tableList'
+            ,height: 332
+            ,url: _contextPath + '/gen/listTableByPager/' + data.value
+            ,page: true
+            ,cols: [[
+                {checkbox: true}
+                ,{field: 'tableName', title: '表名'}
+                ,{field: 'engine', title: 'engine'}
+                ,{field: 'tableComment', title: '备注'}
+                ,{field: 'createTime', title: '创建时间', sort: true}
+            ]]
+        });
     });
 });

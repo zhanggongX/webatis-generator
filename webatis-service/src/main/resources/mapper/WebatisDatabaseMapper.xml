@@ -5,6 +5,7 @@
 
     <resultMap id="ColumnEntityMap" type="tech.zg.webatis.entity.WebatisDatabaseEntity">
         <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="define_name" property="defineName" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="port" property="port" jdbcType="INTEGER"/>
@@ -19,6 +20,7 @@
 
     <sql id="SelectColumnSql">
         w.id,
+        w.define_name,
         w.name,
         w.url,
         w.port,
@@ -56,6 +58,7 @@
     <insert id="save" parameterType="tech.zg.webatis.entity.WebatisDatabaseEntity" useGeneratedKeys="true" keyProperty="id">
         insert into webatis_databases
         (
+            `define_name`,
             `name`,
             `url`,
             `port`,
@@ -66,6 +69,7 @@
         )
         values
         (
+            #{defineName},
             #{name},
             #{url},
             #{port},
@@ -79,13 +83,14 @@
     <update id="update" parameterType="tech.zg.webatis.entity.WebatisDatabaseEntity">
 		update webatis_databases
 		<set>
-			<if test="name != null">`name` = #{name, jdbcType=VARCHAR}, </if>
+			<if test="defineName != null">`define_name` = #{defineName, jdbcType=VARCHAR}, </if>
+            <if test="name != null">`name` = #{name, jdbcType=VARCHAR}, </if>
 			<if test="url != null">`url` = #{url, jdbcType=VARCHAR}, </if>
 			<if test="port != null">`port` = #{port, jdbcType=INTEGER}, </if>
 			<if test="type != null">`type` = #{type, jdbcType=INTEGER}, </if>
 			<if test="username != null">`username` = #{username, jdbcType=VARCHAR}, </if>
 			<if test="password != null">`password` = #{password, jdbcType=VARCHAR}, </if>
-			<if test="path != null">`path` = #{path, jdbcType=VARCHAR}, </if>
+			<if test="path != null">`path` = #{path, jdbcType=VARCHAR} </if>
 		</set>
 		where id = #{id}
 	</update>
