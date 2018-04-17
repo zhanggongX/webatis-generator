@@ -11,44 +11,43 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>target/generated-resources/appassembler/jsw/webatis-generator/bin</directory>
-            <outputDirectory>webatis-generator/bin</outputDirectory>
+            <directory>target/generated-resources/appassembler/jsw/webatis/bin</directory>
+            <outputDirectory>webatis/bin</outputDirectory>
             <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
-            <directory>target/generated-resources/appassembler/jsw/webatis-generator/lib</directory>
-            <outputDirectory>webatis-generator/lib</outputDirectory>
+            <directory>target/generated-resources/appassembler/jsw/webatis/lib</directory>
+            <outputDirectory>webatis/lib</outputDirectory>
             <includes>
                 <include>*.jar</include>
                 <include>libwrapper-linux*</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>target/generated-resources/appassembler/jsw/webatis-generator/conf</directory>
-            <outputDirectory>webatis-generator/conf</outputDirectory>
+            <directory>target/generated-resources/appassembler/jsw/webatis/conf</directory>
+            <outputDirectory>webatis/conf</outputDirectory>
             <includes>
                 <include>*</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>target/classes/</directory>
-            <outputDirectory>webatis-generator/conf</outputDirectory>
+            <outputDirectory>webatis/conf</outputDirectory>
             <includes>
                 <include>logback-spring.xml</include>
                 <include>application.yml</include>
-                <!--<include>application-sit.yml</include>
-                <include>application-uat.yml</include>
-                <include>application-prod.yml</include>-->
+                <include>application-sit.yml</include>
+                <include>application-prod.yml</include>
                 <include>mybatis-config.xml</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>src/main/assembly/conf</directory>
-            <outputDirectory>webatis-generator/conf</outputDirectory>
+            <outputDirectory>webatis/conf</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>target/classes/</directory>
-            <outputDirectory>webatis-generator/logs</outputDirectory>
+            <outputDirectory>webatis/logs</outputDirectory>
             <excludes>
                 <exclude>**/*</exclude>
             </excludes>

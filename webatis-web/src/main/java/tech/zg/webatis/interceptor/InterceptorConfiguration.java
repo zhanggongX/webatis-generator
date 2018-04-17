@@ -8,10 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * 控制层拦截器配置
  *
- * @author 卢益
- * @version 1.0.0 on 2017/8/16 9:47
  */
 @Component("interceptorConfiguration")
 public class InterceptorConfiguration extends WebMvcConfigurerAdapter {

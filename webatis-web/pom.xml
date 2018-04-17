@@ -38,7 +38,7 @@
     </dependencies>
 
     <build>
-        <finalName>webatis-generator</finalName>
+        <finalName>webatis</finalName>
 
         <plugins>
             <plugin>
@@ -72,7 +72,7 @@
                     <useWildcardClassPath>true</useWildcardClassPath>
                     <daemons>
                         <daemon>
-                            <id>webatis-generator</id>
+                            <id>webatis</id>
                             <mainClass>tech.zg.webatis.WebatisApplication</mainClass>
                             <commandLineArguments>
                                 <commandLineArgument>start</commandLineArgument>

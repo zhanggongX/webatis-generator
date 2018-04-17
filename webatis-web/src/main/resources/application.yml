@@ -11,8 +11,8 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-  resources:
-    static-locations: classpath:/static/,classpath:/views/,classpath:/layui
+  #resources:
+  #  static-locations: classpath:/static/,classpath:/views/,classpath:/layui
 
 #Tomcat
 server:
