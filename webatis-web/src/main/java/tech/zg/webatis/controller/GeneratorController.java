@@ -79,7 +79,7 @@ public class GeneratorController {
         Pager pager = PagerUtil.getPager(params);
         String tableName = (String) params.get("tableName");
         try {
-            generatorService.listByPager(pager, dbId, tableName);
+            generatorService.list(dbId, tableName);
         } catch (PropertyVetoException e) {
 
         }

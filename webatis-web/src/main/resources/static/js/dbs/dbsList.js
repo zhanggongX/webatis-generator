@@ -86,7 +86,7 @@ layui.config({
             type: 2,
             title: '新增数据库',
             content: _contextPath + '/dbs/add/',
-            area: ['800px', '650px'],
+            area: ['850px', '700px'],
             anim: 6,
             btn: ['关闭'],
             yes: function(index, layero){
