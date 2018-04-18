@@ -10,13 +10,17 @@ package tech.zg.webatis.service.impl;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import tech.zg.webatis.bean.ColumnBean;
 import tech.zg.webatis.bean.TableBean;
+import tech.zg.webatis.common.DateUtils;
 import tech.zg.webatis.common.WebatisConstants;
 import tech.zg.webatis.entity.WebatisDatabaseEntity;
 import tech.zg.webatis.mapper.WebatisDatabaseMapper;
@@ -27,7 +31,11 @@ import tech.zg.webatis.service.GeneratorService;
 
 import java.beans.PropertyVetoException;
 import java.io.ByteArrayOutputStream;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipOutputStream;
 
 @Service("generatorService")
@@ -81,35 +89,49 @@ public class GeneratorServiceImpl implements GeneratorService{
      * @return Pager
      */
     @Override
-    public Pager list(Integer dbId, String tableName) throws PropertyVetoException {
+    public List<TableBean> list(Integer dbId, String tableName) throws PropertyVetoException {
 
         WebatisDatabaseEntity webatisDatabaseEntity = webatisDatabaseMapper.get(dbId);
         JdbcTemplate jdbcTemplate = getJdbcTemplate(webatisDatabaseEntity);
-        //jdbcTemplate.
-
-        //jdbcTemplate.
-        //PagerHelper.startPage(pager);
-        //tableMapper.list(tableName);
-        return null;
+        StringBuffer querySql = new StringBuffer();
+        querySql.append("select t.table_name, t.engine, t.table_comment, t.create_time from information_schema.tables t ");
+        querySql.append("where table_schema = (select database())");
+        if(StringUtils.isNotEmpty(tableName)){
+            querySql.append("and table_name = ").append(tableName);
+        }
+        LOGGER.info("query SQL is : " + querySql.toString());
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(querySql.toString());
+        List<TableBean> tableBeans = new ArrayList<>();
+        TableBean tableBean = new TableBean();
+        for(Map<String, Object> row : rows){
+            tableBean.setTableName((String) row.get("table_name"));
+            tableBean.setEngine((String) row.get("engine"));
+            tableBean.setTableComment((String) row.get("table_comment"));
+            Timestamp timestamp = (Timestamp) row.get("create_time");
+            tableBean.setCreateTime(DateUtils.formatDate(timestamp, null));
+            tableBeans.add(tableBean);
+        }
+        return tableBeans;
     }
 
     private JdbcTemplate getJdbcTemplate(WebatisDatabaseEntity webatisDatabaseEntity) throws PropertyVetoException {
         StringBuffer urlBuf = new StringBuffer("jdbc:");
-        if(webatisDatabaseEntity.getType() == WebatisConstants.MYSQL){
+        if(webatisDatabaseEntity.getType().equals(WebatisConstants.MYSQL)){
             urlBuf.append("mysql://");
-        }else if(webatisDatabaseEntity.getType() == WebatisConstants.ORACLE){
+        }else if(webatisDatabaseEntity.getType().equals(WebatisConstants.ORACLE)) {
             //
         }
         urlBuf.append(webatisDatabaseEntity.getUrl()).append(":").append(webatisDatabaseEntity.getPort()).append("/");
-        urlBuf.append(webatisDatabaseEntity.getName()).append("?useUnicode=true&characterEncoding=utf-8");
-        LOGGER.info("jdbcUrl is" + urlBuf.toString());
+        urlBuf.append(webatisDatabaseEntity.getName());
+        LOGGER.info("jdbcUrl is : " + urlBuf.toString());
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass("com.mysql.jdbc.Driver");
+        dataSource.setJdbcUrl(urlBuf.toString());
         dataSource.setUser(webatisDatabaseEntity.getUsername());
         dataSource.setPassword(webatisDatabaseEntity.getPassword());
-        dataSource.setJdbcUrl(urlBuf.toString());
-        dataSource.setDriverClass("com.mysql.jdbc.Driver");
-        dataSource.setInitialPoolSize(1);
+        dataSource.setInitialPoolSize(3);
         dataSource.setMaxPoolSize(10);
+        dataSource.setMaxStatements(10);
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return jdbcTemplate;
     }

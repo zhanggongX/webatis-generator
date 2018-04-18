@@ -40,7 +40,7 @@ public interface GeneratorService{
      * @param dbId 数据库id
      * @return Pager
      */
-    Pager list(Integer dbId, String tableName) throws PropertyVetoException;
+    List<TableBean> list(Integer dbId, String tableName) throws PropertyVetoException;
 
     /**
      * 通过表名，查询表信息

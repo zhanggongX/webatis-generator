@@ -29,7 +29,7 @@ public class TableBean extends BaseEntity {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
     /**
      * 类名，例如sys_user --> SysUser;
      */
@@ -71,11 +71,11 @@ public class TableBean extends BaseEntity {
         this.tableComment = tableComment;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 

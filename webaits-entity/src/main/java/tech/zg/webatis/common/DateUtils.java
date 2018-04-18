@@ -49,6 +49,20 @@ public class DateUtils {
         return formatDate;
     }
 
+    public static String formatDate(Timestamp timestamp, String format) {
+        if (timestamp == null){
+            return null;
+        }
+        String formatDate = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(format == null ? DATETIME_FORMAT : format);
+            formatDate = dateFormat.format(timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return formatDate;
+    }
+
     /**
      * 获取当前时间，格式为yyyy-MM-dd HH:mm:ss
      * <p>

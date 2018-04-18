@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import tech.zg.webatis.bean.TableBean;
 import tech.zg.webatis.common.RestResult;
 import tech.zg.webatis.pager.Pager;
 import tech.zg.webatis.pager.PagerUtil;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -76,18 +78,15 @@ public class GeneratorController {
     @RequestMapping("/listTableByPager/{dbId}")
     @ResponseBody
     public RestResult listByPager(@PathVariable Integer dbId, @RequestParam Map<String, Object> params){
-        Pager pager = PagerUtil.getPager(params);
         String tableName = (String) params.get("tableName");
+        List<TableBean> tableBeanList = null;
         try {
-            generatorService.list(dbId, tableName);
+            tableBeanList = generatorService.list(dbId, tableName);
         } catch (PropertyVetoException e) {
 
         }
-        RestResult restResult = RestResult.success();
         //为了兼容layui
-        restResult.put("count", pager.getTotalCount());
-        restResult.put("data", pager.getList());
-        restResult.put("code", 0);
+        RestResult restResult = RestResult.success().put("data", tableBeanList);
         return restResult;
     }
 
