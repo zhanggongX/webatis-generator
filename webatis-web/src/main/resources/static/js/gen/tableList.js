@@ -91,7 +91,6 @@ layui.config({
             ,elem: '#tableList'
             ,height: 332
             ,url: _contextPath + '/gen/listTableByPager/' + data.value
-            ,page: true
             ,cols: [[
                 {checkbox: true}
                 ,{field: 'tableName', title: '表名'}
