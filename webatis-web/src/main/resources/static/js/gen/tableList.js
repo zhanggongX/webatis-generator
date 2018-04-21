@@ -81,16 +81,19 @@ layui.config({
                 form.append($("<input></input>").attr("type", "hidden").attr("name", params[i].name).attr("value", params[i].value));
             }
         }
+        form.append($("<input></input>").attr("type", "hidden").attr("name", "databaseId").attr("value", databaseId));
         form.appendTo('body').submit().remove();
         console.log(form);
     }
 
     form.on('select(dbsNameSel)', function(data){
+        databaseId = data.value;
         table.render({
             id: 'tableList'
             ,elem: '#tableList'
             ,height: 332
-            ,url: _contextPath + '/gen/listTableByPager/' + data.value
+            ,url: _contextPath + '/gen/listTable/' + data.value
+            ,page: false
             ,cols: [[
                 {checkbox: true}
                 ,{field: 'tableName', title: '表名'}

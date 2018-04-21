@@ -52,10 +52,11 @@ public class GeneratorController {
      * @param response
      */
     @RequestMapping("/genCode")
-    public void list(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] tableNames = request.getParameterValues("tableName");
+        String dbId = request.getParameter("databaseId");
 
-        byte[] data = generatorService.genCode(tableNames);
+        byte[] data = generatorService.genCode(Integer.valueOf(dbId), tableNames);
 
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"code.zip\"");
@@ -75,18 +76,19 @@ public class GeneratorController {
      * @param params 参数
      * @return RestResult
      */
-    @RequestMapping("/listTableByPager/{dbId}")
+    @RequestMapping("/listTable/{dbId}")
     @ResponseBody
-    public RestResult listByPager(@PathVariable Integer dbId, @RequestParam Map<String, Object> params){
+    public RestResult list(@PathVariable Integer dbId, @RequestParam Map<String, Object> params){
         String tableName = (String) params.get("tableName");
         List<TableBean> tableBeanList = null;
         try {
             tableBeanList = generatorService.list(dbId, tableName);
-        } catch (PropertyVetoException e) {
-
+        } catch (Exception e) {
+            LOGGER.error("获取数据库的表数据失败,请检查数据库的配置信息!", e);
+            return RestResult.error("获取数据库的表数据失败,请检查数据库的配置信息!");
         }
         //为了兼容layui
-        RestResult restResult = RestResult.success().put("data", tableBeanList);
+        RestResult restResult = RestResult.success().put("data", tableBeanList).put("code", 0);
         return restResult;
     }
 

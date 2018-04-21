@@ -1,5 +1,6 @@
 package tech.zg.webatis.service;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import tech.zg.webatis.bean.ColumnBean;
 import tech.zg.webatis.bean.TableBean;
 import tech.zg.webatis.pager.Pager;
@@ -26,7 +27,7 @@ public interface GeneratorService{
      * @param tableNames 表名
      * @return byte[]
      */
-    byte[] genCode(String[] tableNames);
+    byte[] genCode(Integer dbId, String[] tableNames) throws Exception;
 
 
     /**
@@ -40,7 +41,7 @@ public interface GeneratorService{
      * @param dbId 数据库id
      * @return Pager
      */
-    List<TableBean> list(Integer dbId, String tableName) throws PropertyVetoException;
+    List<TableBean> list(Integer dbId, String tableName) throws Exception;
 
     /**
      * 通过表名，查询表信息
@@ -52,7 +53,7 @@ public interface GeneratorService{
      * @param tableName
      * @return TableEntity
      */
-    TableBean getByTableName(String tableName);
+    TableBean getTableInfoByTableName(JdbcTemplate jdbcTemplate, String tableName);
 
-    List<ColumnBean> queryColumnsByTableName(String tableName);
+    List<ColumnBean> queryColumnInfoByTableName(JdbcTemplate jdbcTemplate, String tableName);
 }
