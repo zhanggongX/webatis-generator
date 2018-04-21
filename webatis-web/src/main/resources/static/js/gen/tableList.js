@@ -88,6 +88,10 @@ layui.config({
 
     form.on('select(dbsNameSel)', function(data){
         databaseId = data.value;
+        if(!databaseId || databaseId == null || databaseId == ''){
+            return;
+        }
+        console.log(databaseId);
         table.render({
             id: 'tableList'
             ,elem: '#tableList'
