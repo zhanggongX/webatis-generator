@@ -28,6 +28,7 @@ import java.util.Map;
 /**
  * 数据表controller
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
@@ -44,12 +45,12 @@ public class GeneratorController {
     /**
      * 生成代码
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param request
      * @param response
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     @RequestMapping("/genCode")
     public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -69,16 +70,16 @@ public class GeneratorController {
     /**
      * ajax表数据获奖
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param params 参数
      * @return RestResult
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     @RequestMapping("/listTable/{dbId}")
     @ResponseBody
-    public RestResult list(@PathVariable Integer dbId, @RequestParam Map<String, Object> params){
+    public RestResult list(@PathVariable Integer dbId, @RequestParam Map<String, Object> params) {
         String tableName = (String) params.get("tableName");
         List<TableBean> tableBeanList = null;
         try {
@@ -95,15 +96,15 @@ public class GeneratorController {
     /**
      * 进入列表页
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param mv
      * @return ModelAndView
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     @RequestMapping("/tableList")
-    public ModelAndView list(ModelAndView mv){
+    public ModelAndView list(ModelAndView mv) {
         mv.setViewName("/gen/tableList");
         return mv;
     }
