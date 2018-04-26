@@ -1,0 +1,36 @@
+package ${package}.entity;
+
+import java.io.Serializable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+/**
+ * 基础类
+ * <p>
+ * @author: ${author}
+ * @date: ${datetime}
+ * @version: 1.0.0
+ */
+@JsonIgnoreProperties({"pk"})
+public abstract class BaseEntity implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+    /**
+     * 日志
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger("BaseEntity");
+
+    /**
+     * 构造方法
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     */
+    public BaseEntity() {
+    }
+
+	//可以根据自己的需求增加属性和方法，例如deleted，createdAt, updatedAt
+
+}

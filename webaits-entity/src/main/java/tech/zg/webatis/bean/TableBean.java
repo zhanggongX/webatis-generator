@@ -103,7 +103,6 @@ public class TableBean extends BaseEntity {
         this.columnEntityList = columnEntityList;
     }
 
-    @Override
     public ColumnBean getPk() {
         return pk;
     }

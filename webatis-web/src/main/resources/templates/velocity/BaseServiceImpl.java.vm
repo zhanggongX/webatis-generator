@@ -1,0 +1,85 @@
+package ${package}.service.impl;
+
+import java.io.Serializable;
+
+public abstract class BaseServiceImpl<PK extends Serializable, E extends BaseEntity> implements BaseService<PK, E> {
+
+    /**
+	 * 日志
+	 */
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseServiceImpl.class);
+
+    private BaseMapper<PK, E> baseMapper;
+
+    public BaseServiceImpl() {
+    }
+
+    /**
+     * 为父类方法设置Mapper
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param baseMapper 继承BaseMapper的Mapper
+     */
+    public void setBaseMapper(BaseMapper<PK, E> baseMapper) {
+        this.baseMapper = baseMapper;
+    }
+
+    /**
+     * 保存
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 实体类
+     * @return int 主键id
+     */
+    public int save(E entity) {
+        return this.baseMapper.save(entity);
+    }
+
+    /**
+     * 删除
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 实体类
+     * @return int 删除行数
+     */
+    public int remove(PK id) {
+        return this.baseMapper.remove(id);
+    }
+
+    /**
+     * 更新
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 实体类
+     * @return int 更新行数
+     */
+    public int update(E entity) {
+        return this.baseMapper.update(entity);
+    }
+
+    /**
+     * 查询
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 主键id
+     * @return E 实体类
+     */
+    public E get(PK id) {
+        return (BaseEntity)this.baseMapper.get(id);
+    }
+}

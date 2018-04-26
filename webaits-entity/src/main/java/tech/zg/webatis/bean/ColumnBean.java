@@ -10,7 +10,6 @@ import tech.zg.webatis.entity.base.BaseEntity;
  * @version: 1.0.0
  */
 public class ColumnBean extends BaseEntity{
-
     /**
      * 列名
      */

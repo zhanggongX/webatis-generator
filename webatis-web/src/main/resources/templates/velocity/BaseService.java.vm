@@ -1,0 +1,54 @@
+package ${package}.service;
+
+import java.io.Serializable;
+
+public interface BaseService<PK extends Serializable, E extends BaseEntity> {
+
+    /**
+     * 保存
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 实体类
+     * @return int 主键id
+     */
+    int save(E var1);
+
+    /**
+     * 删除
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 实体类
+     * @return int 删除行数
+     */
+    int remove(PK var1);
+
+    /**
+     * 更新
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 实体类
+     * @return int 更新行数
+     */
+    int update(E var1);
+
+    /**
+     * 查询
+     * <p>
+     * @author: ${author}
+     * @date: ${datetime}
+     * @version: 1.0.0
+     *
+     * @param var1 主键id
+     * @return E 实体类
+     */
+    E get(PK var1);
+}

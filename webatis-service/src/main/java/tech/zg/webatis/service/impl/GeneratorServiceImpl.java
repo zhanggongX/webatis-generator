@@ -16,24 +16,19 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import tech.zg.webatis.bean.ColumnBean;
 import tech.zg.webatis.bean.TableBean;
 import tech.zg.webatis.common.DateUtils;
-import tech.zg.webatis.common.RestResult;
 import tech.zg.webatis.common.WebatisConstants;
 import tech.zg.webatis.entity.WebatisDatabaseEntity;
 import tech.zg.webatis.mapper.WebatisDatabaseMapper;
-import tech.zg.webatis.pager.Pager;
-import tech.zg.webatis.pager.PagerHelper;
-import tech.zg.webatis.service.GenUtils;
+import tech.zg.webatis.service.GenService;
 import tech.zg.webatis.service.GeneratorService;
 import tech.zg.webatis.service.WebatisContextService;
 
-import java.beans.PropertyVetoException;
 import java.io.ByteArrayOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,7 +74,7 @@ public class GeneratorServiceImpl implements GeneratorService {
             //查询列信息
             List<ColumnBean> columns = queryColumnInfoByTableName(jdbcTemplate, tableName);
             //生成代码
-            GenUtils.generatorCode(tableBean, columns, zip);
+            GenService.generatorCode(tableBean, columns, webatisDatabaseEntity.getPath(), zip);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
@@ -250,7 +245,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         querySql.append("where table_schema = (select database()) ");
         querySql.append("and table_name = ? ");
 
-        LOGGER.info("query SQL is : " + querySql.toString());
+        LOGGER.info("Query sql is : " + querySql.toString());
 
         TableBean tableBean = jdbcTemplate.queryForObject(querySql.toString(), new RowMapper<TableBean>() {
             @Override
