@@ -308,44 +308,6 @@ public class GenService {
             default:
                 return null;
         }
-        /*if (templateName.equals("Entity.java.vm")) {
-            return packagePath + "entity" + File.separator + className + "Entity.java";
-        }
-
-        if (templateName.equals("Mapper.java.vm")) {
-            return packagePath + "mapper" + File.separator + className + "Mapper.java";
-        }
-
-        if (templateName.equals("Service.java.vm")) {
-            return packagePath + "service" + File.separator + className + "Service.java";
-        }
-
-        if (templateName.equals("ServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
-        }
-
-        if (templateName.equals("Mapper.xml.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + className + "Mapper.xml";
-        }
-
-        if (templateName.equals("BaseEntity.java.vm")) {
-            return packagePath + "entity" + File.separator + "BaseEntity.java";
-        }
-
-        if (templateName.equals("BaseMapper.java.vm")) {
-            return packagePath + "mapper" + File.separator + "BaseMapper.java";
-        }
-
-        if (templateName.equals("BaseService.java.vm")) {
-            return packagePath + "service" + File.separator + "BaseService.java";
-        }
-
-        if (templateName.equals("BaseServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + "BaseServiceImpl.java";
-        }
-        if (templateName.equals("pom.xml.vm")) {
-            return File.separator + "pom.xml";
-        }*/
     }
 
 }
