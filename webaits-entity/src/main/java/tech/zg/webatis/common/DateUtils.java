@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 /**
  * 日期工具类
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
@@ -27,16 +28,16 @@ public class DateUtils {
     /**
      * java.util.Date时间转换为格式字符串
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param date   需要转换的日期
      * @param format 日期格式，如yyyy-MM-dd HH:mm:ss，可参见DateUtils,默认为yyyy-MM-dd HH:mm:ss
      * @return 转换成功返回对应的日期字符串，转换失败返回null
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     public static String formatDate(Date date, String format) {
-        if (date == null){
+        if (date == null) {
             return null;
         }
         String formatDate = null;
@@ -50,7 +51,7 @@ public class DateUtils {
     }
 
     public static String formatDate(Timestamp timestamp, String format) {
-        if (timestamp == null){
+        if (timestamp == null) {
             return null;
         }
         String formatDate = null;
@@ -66,11 +67,11 @@ public class DateUtils {
     /**
      * 获取当前时间，格式为yyyy-MM-dd HH:mm:ss
      * <p>
+     *
+     * @return 当前时间，格式为yyyy-MM-dd HH:mm:ss
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @return 当前时间，格式为yyyy-MM-dd HH:mm:ss
      */
     public static String getCurrentDateTimeString() {
         return formatDate(getCurrentDate(), DATETIME_FORMAT);
@@ -79,11 +80,11 @@ public class DateUtils {
     /**
      * 获取当前时间
      * <p>
+     *
+     * @return 当前时间，java.util.Date
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @return 当前时间，java.util.Date
      */
     public static Date getCurrentDate() {
         return new Date(System.currentTimeMillis());
@@ -92,12 +93,12 @@ public class DateUtils {
     /**
      * 将时间置为23时59分钟59秒
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param date
      * @return
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     public static Date setDayCutOffTime(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -111,15 +112,15 @@ public class DateUtils {
     /**
      * 将Timestamp时间转换为指定格式日期
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param timestamp 需要转换的日期
      * @return 转换成功返回日期字符串格式为yyyy-MM-dd HH:mm:ss，转换失败返回null
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     public static String timestampToDateTimeString(Timestamp timestamp) {
-        if (timestamp == null){
+        if (timestamp == null) {
             return null;
         }
         return timestampToFormatDateString(timestamp, DATETIME_FORMAT);
@@ -128,11 +129,11 @@ public class DateUtils {
     /**
      * 获取10位时间戳字符串
      * <p>
+     *
+     * @return 时间戳字符串
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @return 时间戳字符串
      */
     public static String getTimestampStr() {
 
@@ -146,11 +147,11 @@ public class DateUtils {
     /**
      * 获取10位时间戳数值
      * <p>
+     *
+     * @return 时间戳数值
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @return 时间戳数值
      */
     public static int getTimestamp() {
 
@@ -160,15 +161,15 @@ public class DateUtils {
     /**
      * 将yyyy-MM-dd HH:mm:ss格式日期String 转换为Timestamp
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param datetime 需要转换的日期字符串,格式为yyyy-MM-dd HH:mm:ss
      * @return 转换成功返回Timestamp，转换失败返回null
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     public static Timestamp datetimeStringToTimestamp(String datetime) {
-        if (datetime == null){
+        if (datetime == null) {
             return null;
         }
         Timestamp result = null;
@@ -183,16 +184,16 @@ public class DateUtils {
     /**
      * 将Timestamp时间转换为指定格式日期
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param timestamp 需要转换的日期
      * @param format    日期格式，如yyyy-MM-dd HH:mm:ss，可参见DateUtils,默认为yyyy-MM-dd HH:mm:ss
      * @return 转换成功返回对应的日期字符串，转换失败返回null
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     public static String timestampToFormatDateString(Timestamp timestamp, String format) {
-        if (timestamp == null){
+        if (timestamp == null) {
             return null;
         }
         // dateFormat 若未输入则默认为yyyy-MM-dd HH:mm:ss
@@ -209,13 +210,13 @@ public class DateUtils {
     /**
      * 根据时间字符串格式化
      * <p>
+     *
+     * @param dateStr 字符串时间
+     * @param format  格式化格式
+     * @return 日期
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @param dateStr 字符串时间
-     * @param format 格式化格式
-     * @return 日期
      */
     public static Date stringToDate(String dateStr, String format) {
         Date date = null;
@@ -232,13 +233,13 @@ public class DateUtils {
     /**
      * 对制定日期，进行增减天数计算，并返回计算后的新日期，正数减，负数减。
      * <p>
+     *
+     * @param date   日期
+     * @param amount 加减天数
+     * @return 运算后的天数
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @param date 日期
-     * @param amount 加减天数
-     * @return 运算后的天数
      */
     public static Date dayAdd(Date date, int amount) {
 
@@ -251,14 +252,14 @@ public class DateUtils {
     /**
      * 判断日期是否在范围内，包含相等的日期
      * <p>
+     *
+     * @param date  要判断的日期
+     * @param start 判断区间范围开始
+     * @param end   判断区间范围结束
+     * @return 在区间内返回true
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @param date 要判断的日期
-     * @param start 判断区间范围开始
-     * @param end 判断区间范围结束
-     * @return 在区间内返回true
      */
     public static boolean isBetween(final Date date, final Date start, final Date end) {
         if (date == null || start == null || end == null || start.after(end)) {

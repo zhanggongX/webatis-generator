@@ -5,6 +5,7 @@ import java.util.Map;
 /**
  * 拼装pager数据
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
@@ -14,14 +15,14 @@ public class PagerUtil {
     /**
      * 拼装分页数据，为了兼容layui
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param params
      * @return Pager
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
-    public static Pager getPager(Map<String, Object> params){
+    public static Pager getPager(Map<String, Object> params) {
 
         Pager pager = new Pager();
         pager.setCurrPage(1);
@@ -29,15 +30,15 @@ public class PagerUtil {
 
         String page = null;
         String limit = null;
-        if(params.containsKey("page")){
+        if (params.containsKey("page")) {
             page = (String) params.get("page");
-            if(page != null){
+            if (page != null) {
                 pager.setCurrPage(Integer.parseInt(page));
             }
         }
-        if(params.containsKey("limit")){
+        if (params.containsKey("limit")) {
             limit = (String) params.get("limit");
-            if(limit != null){
+            if (limit != null) {
                 pager.setPageSize(Integer.parseInt(limit));
             }
         }

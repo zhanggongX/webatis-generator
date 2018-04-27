@@ -1,4 +1,4 @@
-package tech.zg.webatis.entity.base;
+package tech.zg.webatis.entity;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,6 +17,7 @@ import java.util.Map;
 /**
  * 实体基础类
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0

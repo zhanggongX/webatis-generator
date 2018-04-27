@@ -22,16 +22,28 @@ import java.util.Map;
 public class WebatisContextServiceImpl implements WebatisContextService, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
 
+    /**
+     * 向spring中动态注入bean
+     * <p>
+     * @author: 张弓
+     * @date: 2018/4/21
+     * @version: 1.0.0
+     *
+     * @param beanName 参数说明
+     * @param varMap bean的参数
+     * @param tClass bean的类型
+     */
     @Override
     public void registerBean(String beanName, Map<String, Object> varMap, Class<?> tClass) {
         DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(tClass);
-        for(Map.Entry<String, Object> s : varMap.entrySet()){
+        for (Map.Entry<String, Object> s : varMap.entrySet()) {
             String k = s.getKey();
             Object v = s.getValue();
             beanDefinitionBuilder.addPropertyValue(k, v);
@@ -39,7 +51,17 @@ public class WebatisContextServiceImpl implements WebatisContextService, Applica
         beanFactory.registerBeanDefinition(beanName, beanDefinitionBuilder.getBeanDefinition());
     }
 
-
+    /**
+     * 方法说明
+     * <p>
+     * @author: 张弓
+     * @date: 2018/4/21
+     * @version: 1.0.0
+     *
+     * @param beanName bean的名称
+     * @param tClass bean的类型
+     * @return 获取到的bean
+     */
     @Override
     public <T> T getBean(String beanName, Class<T> tClass) {
         return applicationContext.getBean(beanName, tClass);

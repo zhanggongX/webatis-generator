@@ -25,6 +25,7 @@ import javax.sql.DataSource;
 /**
  * 数据源配置已经SqlSessionFactory创建
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
@@ -35,7 +36,7 @@ import javax.sql.DataSource;
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class DataSourceMaster {
 
-    public static final String MASTER_TRANSACTION_MANAGER="masterTransactionManager";
+    public static final String MASTER_TRANSACTION_MANAGER = "masterTransactionManager";
 
     @Autowired
     private DataSourceConfig dataSourceConfig;
@@ -45,12 +46,12 @@ public class DataSourceMaster {
     /**
      * masterSqlSessionFactory
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param
      * @return SqlSessionFactory
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     @Primary
     @Bean(name = "masterSqlSessionFactory")
@@ -70,7 +71,7 @@ public class DataSourceMaster {
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(this.properties.getConfigLocation());
 
-            if(resources!=null && resources.length>0){
+            if (resources != null && resources.length > 0) {
                 factory.setConfigLocation(resources[0]);
             }
         }
@@ -84,11 +85,11 @@ public class DataSourceMaster {
     /**
      * 主数据源配置
      * <p>
-     * @author: 张弓
-     * @date: 
-     * @version: 1.0.0
      *
      * @return DataSource
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     @Primary
     @Bean(name = "masterDataSource")
@@ -107,11 +108,11 @@ public class DataSourceMaster {
     /**
      * 事务管理器
      * <p>
+     *
+     * @return DataSource
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @return DataSource
      */
     @Primary
     @Bean(name = MASTER_TRANSACTION_MANAGER)

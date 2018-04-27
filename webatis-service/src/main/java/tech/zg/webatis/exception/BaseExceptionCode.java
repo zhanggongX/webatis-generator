@@ -7,12 +7,14 @@ import java.util.Map;
 
 /**
  * 基础异常Code
+ * <p>
  *
- * @author 卢益
- * @version 1.0.0 on 2017/8/29
+ * @author ：zhanggong
+ * @version : 1.0.0
+ * @date ：2018/4/27
  */
 @Configuration
-@ConfigurationProperties(prefix = "rainbow")
+@ConfigurationProperties(prefix = "webaits")
 public class BaseExceptionCode {
     /**
      * EX-000001: 系统异常！

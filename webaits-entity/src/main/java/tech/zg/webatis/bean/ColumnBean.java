@@ -1,6 +1,6 @@
 package tech.zg.webatis.bean;
 
-import tech.zg.webatis.entity.base.BaseEntity;
+import tech.zg.webatis.entity.BaseEntity;
 
 /**
  * 一个数据表的的列信息

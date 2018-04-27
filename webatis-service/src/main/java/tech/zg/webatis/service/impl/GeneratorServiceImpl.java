@@ -52,12 +52,12 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 生成代码
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param tableNames 表名
      * @return byte[]
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     @Override
     public byte[] genCode(Integer dbId, String[] tableNames) {
@@ -84,13 +84,13 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 查询数据库中的表
      * <p>
+     *
+     * @param tableName 表名
+     * @param dbId      数据库id
+     * @return Pager
      * @author: 张弓
      * @date:
      * @version: 1.0.0
-     *
-     * @param tableName 表名
-     * @param dbId 数据库id
-     * @return Pager
      */
     @Override
     public List<TableBean> list(Integer dbId, String tableName) throws Exception {
@@ -126,12 +126,12 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 根据数据库对象获取jdbcTemplate
      * <p>
-     * @author: 张弓
-     * @date: 2018/4/21
-     * @version: 1.0.0
      *
      * @param webatisDatabaseEntity 配置的数据库对象
      * @return JdbcTemplate
+     * @author: 张弓
+     * @date: 2018/4/21
+     * @version: 1.0.0
      */
     private JdbcTemplate getJdbcTemplate(WebatisDatabaseEntity webatisDatabaseEntity) {
 
@@ -152,11 +152,11 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 向spring容器中，注入jdbcTemplate
      * <p>
+     *
+     * @param webatisDatabaseEntity 配置的数据库实体
      * @author: 张弓
      * @date: 2018/4/21
      * @version: 1.0.0
-     *
-     * @param webatisDatabaseEntity 配置的数据库实体
      */
     private void regiseterJdbcTemplate(WebatisDatabaseEntity webatisDatabaseEntity) {
         //首先从spring容器中获取数据源
@@ -172,12 +172,12 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 获取数据源
      * <p>
-     * @author: 张弓
-     * @date: 2018/4/21
-     * @version: 1.0.0
      *
      * @param webatisDatabaseEntity
      * @return ComboPooledDataSource
+     * @author: 张弓
+     * @date: 2018/4/21
+     * @version: 1.0.0
      */
     private ComboPooledDataSource getDataSource(WebatisDatabaseEntity webatisDatabaseEntity) {
         //根据主键的唯一性，拼装database的beanName
@@ -198,11 +198,11 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 向spring容器注册数据源
      * <p>
+     *
+     * @param webatisDatabaseEntity
      * @author: 张弓
      * @date: 2018/4/21
      * @version: 1.0.0
-     *
-     * @param webatisDatabaseEntity
      */
     private void registerDataSource(WebatisDatabaseEntity webatisDatabaseEntity) {
         //拼装jdbc url
@@ -231,12 +231,12 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 通过表名，查询表信息
      * <p>
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
      *
      * @param tableName
      * @return TableEntity
+     * @author: 张弓
+     * @date:
+     * @version: 1.0.0
      */
     @Override
     public TableBean getTableInfoByTableName(JdbcTemplate jdbcTemplate, String tableName) {

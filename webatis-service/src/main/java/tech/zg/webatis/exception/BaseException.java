@@ -11,12 +11,14 @@ import java.util.UUID;
 
 /**
  * 公共异常
+ * <p>
  *
- * @author 卢益
- * @version 1.0.0 on 2017/8/29
+ * @author ：zhanggong
+ * @version : 1.0.0
+ * @date ：2018/4/27
  */
 public class BaseException extends Exception {
-    
+
     protected Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private static final long serialVersionUID = 8563126331361802238L;
 

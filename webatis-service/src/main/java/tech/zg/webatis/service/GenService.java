@@ -25,13 +25,24 @@ import java.util.zip.ZipOutputStream;
 /**
  * 代码生成器   工具类
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
  */
 public class GenService {
 
-    public static List<String> getTemplates(){
+    /**
+     * 获取模板
+     * <p>
+     *
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
+     */
+    public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
         templates.add("templates/velocity/Entity.java.vm");
         templates.add("templates/velocity/Mapper.java.vm");
@@ -41,9 +52,17 @@ public class GenService {
         return templates;
     }
 
-
+    /**
+     * 获取基础模板
+     * <p>
+     *
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
+     */
     public static List<String> getBaseTemplates() {
-
         List<String> templates = new ArrayList<String>();
         templates.add("templates/velocity/BaseEntity.java.vm");
         templates.add("templates/velocity/BaseMapper.java.vm");
@@ -55,6 +74,17 @@ public class GenService {
 
     /**
      * 生成代码
+     * <p>
+     *
+     * @param tableEntity      表信息
+     * @param columnEntityList 列信息
+     * @param packagePath      包路径
+     * @param zip              压缩包
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
      */
     public static void generatorCode(TableBean tableEntity, List<ColumnBean> columnEntityList, String packagePath, ZipOutputStream zip) {
         //配置信息
@@ -62,13 +92,13 @@ public class GenService {
         boolean hasBigDecimal = false;
         //表信息
         //表名转换成Java类名
-        String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix" ));
+        String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
         //类名，例如sys_user --> SysUser;
         tableEntity.setClassName(className);
         //类名，例如sys_user --> sysUser;
         tableEntity.setClassname(StringUtils.uncapitalize(className));
         //列信息
-        for(ColumnBean columnEntity : columnEntityList){
+        for (ColumnBean columnEntity : columnEntityList) {
             //列名转换成Java属性名
             String attrName = columnToJava(columnEntity.getColumnName());
             //属性名称(第一个字母大写)，如：user_name => UserName
@@ -76,9 +106,9 @@ public class GenService {
             //属性名称(第一个字母小写)，如：user_name => userName
             columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
             //列的数据类型，转换成Java类型，如果查找不到就是unknowType
-            String attrType = config.getString(columnEntity.getDataType(), "unknowType" );
+            String attrType = config.getString(columnEntity.getDataType(), "unknowType");
             columnEntity.setAttrType(attrType);
-            if (!hasBigDecimal && attrType.equals("BigDecimal" )) {
+            if (!hasBigDecimal && attrType.equals("BigDecimal")) {
                 hasBigDecimal = true;
             }
             //是否主键
@@ -93,7 +123,7 @@ public class GenService {
         }
         //设置velocity资源加载器
         Properties prop = new Properties();
-        prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader" );
+        prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.init(prop);
         packagePath = StringUtils.isBlank(packagePath) ? config.getString("package") : packagePath;
         //封装模板数据
@@ -107,58 +137,127 @@ public class GenService {
         map.put("columns", tableEntity.getColumnEntityList());
         map.put("hasBigDecimal", hasBigDecimal);
         map.put("package", packagePath);
-        map.put("moduleName", config.getString("moduleName" ));
-        map.put("author", config.getString("author" ));
-        map.put("email", config.getString("email" ));
+        map.put("moduleName", config.getString("moduleName"));
+        map.put("author", config.getString("author"));
+        map.put("email", config.getString("email"));
         map.put("datetime", DateUtils.formatDate(new Date(), DateUtils.DATETIME_FORMAT));
         map.put("pkType", tableEntity.getPk().getAttrType());
-
         VelocityContext context = new VelocityContext(map);
-
         //获取模板列表
         List<String> templates = getTemplates();
+        writerForZip(templates, tableEntity, context, zip, packagePath);
+    }
+
+    public static void generatorBaseCode(String packagePath, ZipOutputStream zip) {
+
+        Configuration config = getConfig();
+        //设置velocity资源加载器
+        Properties prop = new Properties();
+        prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        Velocity.init(prop);
+        packagePath = StringUtils.isBlank(packagePath) ? config.getString("package") : packagePath;
+        //封装模板数据
+        Map<String, Object> map = new HashMap<>();
+        map.put("package", packagePath);
+        map.put("moduleName", config.getString("moduleName"));
+        map.put("author", config.getString("author"));
+        map.put("email", config.getString("email"));
+        map.put("datetime", DateUtils.formatDate(new Date(), DateUtils.DATETIME_FORMAT));
+
+        VelocityContext context = new VelocityContext(map);
+        //获取模板列表
+        List<String> templates = getBaseTemplates();
+        writerForZip(templates, null, context, zip, packagePath);
+    }
+
+    /**
+     * 渲染模板，并放到压缩文件中
+     * <p>
+     *
+     * @param templates
+     * @param tableEntity
+     * @param context
+     * @param zip
+     * @param packagePath
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
+     */
+    private static void writerForZip(List<String> templates, TableBean tableEntity, VelocityContext context, ZipOutputStream zip, String packagePath) {
+
         for (String template : templates) {
             //渲染模板
             StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, "UTF-8" );
+            Template tpl = Velocity.getTemplate(template, "UTF-8");
             tpl.merge(context, sw);
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), packagePath)));
-                IOUtils.write(sw.toString(), zip, "UTF-8" );
+                if (tableEntity != null) {
+                    zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), packagePath)));
+                } else {
+                    zip.putNextEntry(new ZipEntry(getFileName(template, null, packagePath)));
+                }
+                IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (IOException e) {
-                throw new BaseRunTimeException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
+                throw new BaseRunTimeException("渲染基础模板失败，表名：" + e);
             }
         }
+
     }
 
 
     /**
      * 列名转换成Java属性名
+     * <p>
+     *
+     * @param columnName 列名
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
      */
     public static String columnToJava(String columnName) {
-        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "" );
+        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
     /**
      * 表名转换成Java类名
+     * <p>
+     *
+     * @param tableName   表名
+     * @param tablePrefix 表前缀，没有可忽略
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
      */
     public static String tableToJava(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
-            tableName = tableName.replace(tablePrefix, "" );
+            tableName = tableName.replace(tablePrefix, "");
         }
         return columnToJava(tableName);
     }
 
     /**
      * 获取配置信息
+     * <p>
+     *
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
      */
     public static Configuration getConfig() {
         try {
-            return new PropertiesConfiguration("gen.properties" );
+            return new PropertiesConfiguration("gen.properties");
         } catch (ConfigurationException e) {
             throw new BaseRunTimeException(BaseExceptionCode.PARSE_CONFIG_FAIL, e);
         }
@@ -166,6 +265,16 @@ public class GenService {
 
     /**
      * 获取文件名
+     * <p>
+     *
+     * @param template    模板名称
+     * @param className   类名
+     * @param packageName 包名
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
      */
     public static String getFileName(String template, String className, String packageName) {
 
@@ -175,84 +284,68 @@ public class GenService {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }
         String templateName = template.split("/")[2];
-        if (templateName.equals("Entity.java.vm" )) {
+        switch (templateName) {
+            case "Entity.java.vm":
+                return packagePath + "entity" + File.separator + className + "Entity.java";
+            case "Mapper.java.vm":
+                return packagePath + "mapper" + File.separator + className + "Mapper.java";
+            case "Service.java.vm":
+                return packagePath + "service" + File.separator + className + "Service.java";
+            case "ServiceImpl.java.vm":
+                return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+            case "Mapper.xml.vm":
+                return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + className + "Mapper.xml";
+            case "BaseEntity.java.vm":
+                return packagePath + "entity" + File.separator + "BaseEntity.java";
+            case "BaseMapper.java.vm":
+                return packagePath + "mapper" + File.separator + "BaseMapper.java";
+            case "BaseService.java.vm":
+                return packagePath + "service" + File.separator + "BaseService.java";
+            case "BaseServiceImpl.java.vm":
+                return packagePath + "service" + File.separator + "impl" + File.separator + "BaseServiceImpl.java";
+            case "pom.xml.vm":
+                return File.separator + "pom.xml";
+            default:
+                return null;
+        }
+        /*if (templateName.equals("Entity.java.vm")) {
             return packagePath + "entity" + File.separator + className + "Entity.java";
         }
 
-        if (templateName.equals("Mapper.java.vm" )) {
+        if (templateName.equals("Mapper.java.vm")) {
             return packagePath + "mapper" + File.separator + className + "Mapper.java";
         }
 
-        if (templateName.equals("Service.java.vm" )) {
+        if (templateName.equals("Service.java.vm")) {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-        if (templateName.equals("ServiceImpl.java.vm" )) {
+        if (templateName.equals("ServiceImpl.java.vm")) {
             return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 
-        if (templateName.equals("Mapper.xml.vm" )) {
+        if (templateName.equals("Mapper.xml.vm")) {
             return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + className + "Mapper.xml";
         }
 
-        if (templateName.equals("BaseEntity.java.vm" )) {
+        if (templateName.equals("BaseEntity.java.vm")) {
             return packagePath + "entity" + File.separator + "BaseEntity.java";
         }
 
-        if (templateName.equals("BaseMapper.java.vm" )) {
+        if (templateName.equals("BaseMapper.java.vm")) {
             return packagePath + "mapper" + File.separator + "BaseMapper.java";
         }
 
-        if (templateName.equals("BaseService.java.vm" )) {
+        if (templateName.equals("BaseService.java.vm")) {
             return packagePath + "service" + File.separator + "BaseService.java";
         }
 
-        if (templateName.equals("BaseServiceImpl.java.vm" )) {
+        if (templateName.equals("BaseServiceImpl.java.vm")) {
             return packagePath + "service" + File.separator + "impl" + File.separator + "BaseServiceImpl.java";
         }
-        if (templateName.equals("pom.xml.vm" )) {
+        if (templateName.equals("pom.xml.vm")) {
             return File.separator + "pom.xml";
-        }
-
-        return null;
-    }
-
-    public static void generatorBaseCode(String packagePath, ZipOutputStream zip) {
-
-        Configuration config = getConfig();
-        //设置velocity资源加载器
-        Properties prop = new Properties();
-        prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader" );
-        Velocity.init(prop);
-        packagePath = StringUtils.isBlank(packagePath) ? config.getString("package") : packagePath;
-        //封装模板数据
-        Map<String, Object> map = new HashMap<>();
-        map.put("package", packagePath);
-        map.put("moduleName", config.getString("moduleName" ));
-        map.put("author", config.getString("author" ));
-        map.put("email", config.getString("email" ));
-        map.put("datetime", DateUtils.formatDate(new Date(), DateUtils.DATETIME_FORMAT));
-
-        VelocityContext context = new VelocityContext(map);
-
-        //获取模板列表
-        List<String> templates = getBaseTemplates();
-        for (String template : templates) {
-            //渲染模板
-            StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, "UTF-8" );
-            tpl.merge(context, sw);
-
-            try {
-                //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, null, packagePath)));
-                IOUtils.write(sw.toString(), zip, "UTF-8" );
-                IOUtils.closeQuietly(sw);
-                zip.closeEntry();
-            } catch (IOException e) {
-                throw new BaseRunTimeException("渲染基础模板失败，表名：" + e);
-            }
-        }
+        }*/
     }
 
 }

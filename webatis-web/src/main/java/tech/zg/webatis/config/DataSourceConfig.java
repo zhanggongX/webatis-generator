@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * 读取数据源配置
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
@@ -38,25 +39,6 @@ public class DataSourceConfig {
      */
     @Value("${druid.dataSource.master.password}")
     private String masterPassword;
-
-    /**
-     * JDBC连接地址
-     * @Value("${druid.dataSource.slave.url}")
-     */
-    private String slaveJdbcUrl;
-
-    /**
-     * 访问账户
-     * @Value("${druid.dataSource.slave.username}")
-     */
-    private String slaveUsername;
-
-    /**
-     * 访问密码
-     * @Value("${druid.dataSource.slave.password}")
-     */
-     private String slavePassword;
-
 
     /**
      * 连接池最大值
@@ -125,30 +107,6 @@ public class DataSourceConfig {
 
     public void setMasterPassword(String masterPassword) {
         this.masterPassword = masterPassword;
-    }
-
-    public String getSlaveJdbcUrl() {
-        return slaveJdbcUrl;
-    }
-
-    public void setSlaveJdbcUrl(String slaveJdbcUrl) {
-        this.slaveJdbcUrl = slaveJdbcUrl;
-    }
-
-    public String getSlaveUsername() {
-        return slaveUsername;
-    }
-
-    public void setSlaveUsername(String slaveUsername) {
-        this.slaveUsername = slaveUsername;
-    }
-
-    public String getSlavePassword() {
-        return slavePassword;
-    }
-
-    public void setSlavePassword(String slavePassword) {
-        this.slavePassword = slavePassword;
     }
 
     public int getMaxActive() {

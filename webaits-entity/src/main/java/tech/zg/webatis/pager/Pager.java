@@ -14,27 +14,27 @@ public class Pager<T> {
     /**
      * 第几页
      */
-    private int currPage; // required
+    private int currPage;
 
     /**
      * 每页展示几条
      */
-    private int pageSize; // required
+    private int pageSize;
 
     /**
      * 总记录数
      */
-    private int totalCount; // required
+    private int totalCount;
 
     /**
      * 总页数
      */
-    private int totalPage; // required
+    private int totalPage;
 
     /**
      * 分页查询结果
      */
-    private List<T> list;  // 分页数据结果
+    private List<T> list;
 
     /**
      * mapper.xml中定义的统计select语句id(用于提高统计预计性能)

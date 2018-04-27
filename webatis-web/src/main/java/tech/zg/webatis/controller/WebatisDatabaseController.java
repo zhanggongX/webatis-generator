@@ -29,6 +29,17 @@ public class WebatisDatabaseController {
     @Autowired
     private WebatisDatabaseService webatisDatabaseService;
 
+    /**
+     * 进入新增数据库配置页
+     * <p>
+     *
+     * @param mv
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/add")
     public ModelAndView add(ModelAndView mv) {
         mv.addObject("webatisDatabase", new WebatisDatabaseEntity());
@@ -37,12 +48,34 @@ public class WebatisDatabaseController {
         return mv;
     }
 
+    /**
+     * 进入数据库列表页
+     * <p>
+     *
+     * @param mv
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/list")
     public ModelAndView list(ModelAndView mv) {
         mv.setViewName("/dbs/dbsList");
         return mv;
     }
 
+    /**
+     * 新增数据库配置
+     * <p>
+     *
+     * @param databaseEntity
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/save")
     @ResponseBody
     public RestResult save(@RequestBody WebatisDatabaseEntity databaseEntity) {
@@ -55,6 +88,17 @@ public class WebatisDatabaseController {
         return RestResult.success();
     }
 
+    /**
+     * 更新数据库配置
+     * <p>
+     *
+     * @param databaseEntity
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/update")
     @ResponseBody
     public RestResult update(@RequestBody WebatisDatabaseEntity databaseEntity) {
@@ -67,6 +111,18 @@ public class WebatisDatabaseController {
         return RestResult.success();
     }
 
+    /**
+     * 进入更新数据库配置页
+     * <p>
+     *
+     * @param id
+     * @param mv
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/details/{id}")
     public ModelAndView details(@PathVariable Integer id, ModelAndView mv) {
         WebatisDatabaseEntity webatisDatabaseEntity = null;
@@ -82,6 +138,17 @@ public class WebatisDatabaseController {
         return mv;
     }
 
+    /**
+     * 分页查询数据库
+     * <p>
+     *
+     * @param params
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/listByPager")
     @ResponseBody
     public RestResult listByPager(@RequestParam Map<String, Object> params) {
@@ -96,9 +163,19 @@ public class WebatisDatabaseController {
         return restResult;
     }
 
+    /**
+     * 删除数据配置
+     *
+     * @param id
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/deleted/{id}")
     @ResponseBody
-    public RestResult deleted(@PathVariable Integer id){
+    public RestResult deleted(@PathVariable Integer id) {
         try {
             webatisDatabaseService.remove(id);
         } catch (BaseException e) {
@@ -108,10 +185,19 @@ public class WebatisDatabaseController {
         }
         return RestResult.success();
     }
-
+    
+    /**
+     * 查询数据库配置列表
+     * <p>
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
     @RequestMapping("/listAll")
     @ResponseBody
-    public RestResult listAll(){
+    public RestResult listAll() {
         List<WebatisDatabaseEntity> webatisDatabaseEntityList = webatisDatabaseService.list();
         return RestResult.success().put("webatisDatabases", webatisDatabaseEntityList);
     }

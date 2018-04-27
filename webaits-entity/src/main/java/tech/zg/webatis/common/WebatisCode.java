@@ -3,6 +3,7 @@ package tech.zg.webatis.common;
 /**
  * 状态码
  * <p>
+ *
  * @author: 张弓
  * @version: 1.0.0
  */

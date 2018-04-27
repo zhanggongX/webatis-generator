@@ -3,11 +3,13 @@ package tech.zg.webatis.pager;
 /**
  * 分页
  * <p>
+ *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
  */
 public class PagerHelper<T> {
+
     protected static final ThreadLocal<Pager> LOCAL_PAGE = new ThreadLocal<Pager>();
 
     /**
@@ -38,11 +40,11 @@ public class PagerHelper<T> {
     /**
      * 开始分页
      *
-     * @param pagerInfo  分页信息
+     * @param pagerInfo 分页信息
      * @return PagerInfo
      */
     public static <E> Pager<E> startPage(Pager pagerInfo) {
-        if(pagerInfo == null) {
+        if (pagerInfo == null) {
             pagerInfo = new Pager();
         }
         setLocalPage(pagerInfo);

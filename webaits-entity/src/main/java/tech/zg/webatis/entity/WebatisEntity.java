@@ -1,4 +1,4 @@
-package tech.zg.webatis.entity.base;
+package tech.zg.webatis.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -7,10 +7,11 @@ import java.util.Date;
 /**
  * 类说明
  * <p>
+ *
  * @author: 张弓
  * @version: 1.0.0
  */
-public class WebatisEntity extends BaseEntity{
+public class WebatisEntity extends BaseEntity {
 
     private Integer deleted;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

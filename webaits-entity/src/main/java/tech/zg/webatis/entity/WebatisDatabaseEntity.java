@@ -1,16 +1,21 @@
 package tech.zg.webatis.entity;
 
-import tech.zg.webatis.entity.base.WebatisEntity;
-
 /**
  * 数据库实体类
  * <p>
+ *
  * @author: 张弓
  * @version: 1.0.0
  */
 public class WebatisDatabaseEntity extends WebatisEntity {
 
+    /**
+     * 主键id
+     */
     private Integer id;
+    /**
+     * 自定义数据名称
+     */
     private String defineName;
     /**
      * 数据库名称

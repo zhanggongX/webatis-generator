@@ -1,8 +1,7 @@
 package tech.zg.webatis.bean;
 
-import tech.zg.webatis.entity.base.BaseEntity;
+import tech.zg.webatis.entity.BaseEntity;
 
-import java.util.Date;
 import java.util.List;
 
 /**
