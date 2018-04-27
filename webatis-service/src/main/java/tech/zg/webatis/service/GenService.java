@@ -49,6 +49,7 @@ public class GenService {
         templates.add("templates/velocity/BaseMapper.java.vm");
         templates.add("templates/velocity/BaseService.java.vm");
         templates.add("templates/velocity/BaseServiceImpl.java.vm");
+        templates.add("templates/velocity/pom.xml.vm");
         return templates;
     }
 
@@ -102,7 +103,8 @@ public class GenService {
         map.put("pk", tableEntity.getPk());
         map.put("className", tableEntity.getClassName());
         map.put("classname", tableEntity.getClassname());
-        map.put("pathName", tableEntity.getClassname().toLowerCase());        map.put("columns", tableEntity.getColumnEntityList());
+        map.put("pathName", tableEntity.getClassname().toLowerCase());
+        map.put("columns", tableEntity.getColumnEntityList());
         map.put("hasBigDecimal", hasBigDecimal);
         map.put("package", packagePath);
         map.put("moduleName", config.getString("moduleName" ));
@@ -207,6 +209,9 @@ public class GenService {
 
         if (templateName.equals("BaseServiceImpl.java.vm" )) {
             return packagePath + "service" + File.separator + "impl" + File.separator + "BaseServiceImpl.java";
+        }
+        if (templateName.equals("pom.xml.vm" )) {
+            return File.separator + "pom.xml";
         }
 
         return null;
