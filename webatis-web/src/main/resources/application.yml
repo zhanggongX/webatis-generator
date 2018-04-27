@@ -1,7 +1,6 @@
 spring:
   profiles:
-    #active: ${env}
-    active: dev
+    active: ${env}
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
