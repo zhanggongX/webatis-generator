@@ -1,6 +1,5 @@
 package ${package}.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
@@ -9,16 +8,17 @@ import java.math.BigDecimal;
 
 /**
  * ${tableComment}
- * 
+ * <p>
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
-public class ${className}Entity implements BaseEntity {
-	private static final long serialVersionUID = 1L;
+public class ${className}Entity extends BaseEntity {
 	
 #foreach ($column in $columns)
-	//$column.columnComment
+	/**
+	 * $column.columnComment
+ 	 */
 	private $column.attrType $column.attrname;
 #end
 

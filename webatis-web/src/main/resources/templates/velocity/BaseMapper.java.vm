@@ -1,7 +1,15 @@
 package ${package}.mapper;
 
 import java.io.Serializable;
+import ${package}.entity.BaseEntity;
 
+/**
+ * 基础Mapper
+ * <p>
+ * @author: ${author}
+ * @date: ${datetime}
+ * @version: 1.0.0
+ */
 public interface BaseMapper<PK extends Serializable, E extends BaseEntity> {
     
     /**

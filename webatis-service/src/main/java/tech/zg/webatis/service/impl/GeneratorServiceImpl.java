@@ -76,6 +76,7 @@ public class GeneratorServiceImpl implements GeneratorService {
             //生成代码
             GenService.generatorCode(tableBean, columns, webatisDatabaseEntity.getPath(), zip);
         }
+        GenService.generatorBaseCode(webatisDatabaseEntity.getPath(), zip);
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }

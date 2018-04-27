@@ -21,6 +21,7 @@ import java.util.Map;
  * @date:
  * @version: 1.0.0
  */
+@JsonIgnoreProperties({"pk"})
 public abstract class BaseEntity implements Serializable {
 
 }

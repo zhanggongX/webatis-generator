@@ -1,8 +1,23 @@
 package ${package}.service.impl;
 
+import ${package}.entity.BaseEntity;
+import ${package}.mapper.BaseMapper;
+import ${package}.service.BaseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.Serializable;
+import org.springframework.stereotype.Service;
 
-public abstract class BaseServiceImpl<PK extends Serializable, E extends BaseEntity> implements BaseService<PK, E> {
+
+/**
+ * 基础Service实现
+ * <p>
+ * @author: ${author}
+ * @date: ${datetime}
+ * @version: 1.0.0
+ */
+@Service("baseService")
+public class BaseServiceImpl<PK extends Serializable, E extends BaseEntity> implements BaseService<PK, E> {
 
     /**
 	 * 日志
@@ -34,9 +49,10 @@ public abstract class BaseServiceImpl<PK extends Serializable, E extends BaseEnt
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 实体类
+     * @param entity 实体类
      * @return int 主键id
      */
+    @Override
     public int save(E entity) {
         return this.baseMapper.save(entity);
     }
@@ -48,9 +64,10 @@ public abstract class BaseServiceImpl<PK extends Serializable, E extends BaseEnt
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 实体类
+     * @param id 主键id
      * @return int 删除行数
      */
+    @Override
     public int remove(PK id) {
         return this.baseMapper.remove(id);
     }
@@ -62,9 +79,10 @@ public abstract class BaseServiceImpl<PK extends Serializable, E extends BaseEnt
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 实体类
+     * @param entity 实体类
      * @return int 更新行数
      */
+    @Override
     public int update(E entity) {
         return this.baseMapper.update(entity);
     }
@@ -76,10 +94,11 @@ public abstract class BaseServiceImpl<PK extends Serializable, E extends BaseEnt
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 主键id
+     * @param id 主键id
      * @return E 实体类
      */
+    @Override
     public E get(PK id) {
-        return (BaseEntity)this.baseMapper.get(id);
+        return this.baseMapper.get(id);
     }
 }

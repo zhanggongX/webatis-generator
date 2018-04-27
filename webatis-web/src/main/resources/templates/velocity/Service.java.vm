@@ -1,9 +1,7 @@
-package ${package}.${moduleName}.service;
+package ${package}.service;
 
-import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.entity.${className}Entity;
 
-import java.util.List;
-import java.util.Map;
 
 /**
  * ${tableComment}
@@ -12,19 +10,6 @@ import java.util.Map;
  * @email ${email}
  * @date ${datetime}
  */
-public interface ${className}Service {
-	
-	${className}Entity queryObject(${pk.attrType} ${pk.attrname});
-	
-	List<${className}Entity> queryList(Map<String, Object> map);
-	
-	int queryTotal(Map<String, Object> map);
-	
-	void save(${className}Entity ${classname});
-	
-	void update(${className}Entity ${classname});
-	
-	void delete(${pk.attrType} ${pk.attrname});
-	
-	void deleteBatch(${pk.attrType}[] ${pk.attrname}s);
+public interface ${className}Service extends BaseService<${pkType}, ${className}Entity>{
+
 }

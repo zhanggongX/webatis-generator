@@ -1,7 +1,15 @@
 package ${package}.service;
 
 import java.io.Serializable;
+import ${package}.entity.BaseEntity;
 
+/**
+ * 基础Service
+ * <p>
+ * @author: ${author}
+ * @date: ${datetime}
+ * @version: 1.0.0
+ */
 public interface BaseService<PK extends Serializable, E extends BaseEntity> {
 
     /**
@@ -11,10 +19,10 @@ public interface BaseService<PK extends Serializable, E extends BaseEntity> {
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 实体类
+     * @param entity 实体类
      * @return int 主键id
      */
-    int save(E var1);
+    int save(E entity);
 
     /**
      * 删除
@@ -23,10 +31,10 @@ public interface BaseService<PK extends Serializable, E extends BaseEntity> {
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 实体类
+     * @param id 主键id
      * @return int 删除行数
      */
-    int remove(PK var1);
+    int remove(PK id);
 
     /**
      * 更新
@@ -35,10 +43,10 @@ public interface BaseService<PK extends Serializable, E extends BaseEntity> {
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 实体类
+     * @param entity 实体类
      * @return int 更新行数
      */
-    int update(E var1);
+    int update(E entity);
 
     /**
      * 查询
@@ -47,8 +55,8 @@ public interface BaseService<PK extends Serializable, E extends BaseEntity> {
      * @date: ${datetime}
      * @version: 1.0.0
      *
-     * @param var1 主键id
+     * @param id 主键id
      * @return E 实体类
      */
-    E get(PK var1);
+    E get(PK id);
 }
