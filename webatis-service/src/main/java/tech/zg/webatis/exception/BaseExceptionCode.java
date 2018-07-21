@@ -19,15 +19,15 @@ public class BaseExceptionCode {
     /**
      * EX-000001: 系统异常！
      */
-    public static final String SYSTEM_EXCEPTION = "EX-000001";
+    public static final String SYSTEM_EXCEPTION = "WEX001";
     /**
      * EX-000002: JSON转化异常！
      */
-    public static final String PARSE_JSON_EXCEPTION = "EX-000002";
+    public static final String PARSE_JSON_EXCEPTION = "WEX002";
     /**
-     * EX-000003：获取配置文件失败
+     * WEX003：数据源配置错误
      */
-    public static final String PARSE_CONFIG_FAIL = "EX-000003";
+    public static final String DATASOURCE_CONFIG_FAIL = "WEX003";
 
     public static Map<String, String> EX_MAP;
 

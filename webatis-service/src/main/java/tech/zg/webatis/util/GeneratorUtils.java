@@ -1,4 +1,4 @@
-package tech.zg.webatis.service;
+package tech.zg.webatis.util;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -23,54 +23,14 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * 代码生成器   工具类
+ * 代码生成器工具类
  * <p>
  *
  * @author: 张弓
  * @date:
  * @version: 1.0.0
  */
-public class GenService {
-
-    /**
-     * 获取模板
-     * <p>
-     *
-     * @return
-     * @throws
-     * @author : zhanggong
-     * @version : 1.0.0
-     * @date : 2018/4/27
-     */
-    public static List<String> getTemplates() {
-        List<String> templates = new ArrayList<String>();
-        templates.add("templates/velocity/Entity.java.vm");
-        templates.add("templates/velocity/Mapper.java.vm");
-        templates.add("templates/velocity/Mapper.xml.vm");
-        templates.add("templates/velocity/Service.java.vm");
-        templates.add("templates/velocity/ServiceImpl.java.vm");
-        return templates;
-    }
-
-    /**
-     * 获取基础模板
-     * <p>
-     *
-     * @return
-     * @throws
-     * @author : zhanggong
-     * @version : 1.0.0
-     * @date : 2018/4/27
-     */
-    public static List<String> getBaseTemplates() {
-        List<String> templates = new ArrayList<String>();
-        templates.add("templates/velocity/BaseEntity.java.vm");
-        templates.add("templates/velocity/BaseMapper.java.vm");
-        templates.add("templates/velocity/BaseService.java.vm");
-        templates.add("templates/velocity/BaseServiceImpl.java.vm");
-        templates.add("templates/velocity/pom.xml.vm");
-        return templates;
-    }
+public class GeneratorUtils {
 
     /**
      * 生成代码
@@ -148,6 +108,36 @@ public class GenService {
         writerForZip(templates, tableEntity, context, zip, packagePath);
     }
 
+    /**
+     * 获取模板
+     * <p>
+     *
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
+     */
+    private static List<String> getTemplates() {
+        List<String> templates = new ArrayList<String>();
+        templates.add("templates/velocity/Entity.java.vm");
+        templates.add("templates/velocity/Mapper.java.vm");
+        templates.add("templates/velocity/Mapper.xml.vm");
+        templates.add("templates/velocity/Service.java.vm");
+        templates.add("templates/velocity/ServiceImpl.java.vm");
+        return templates;
+    }
+
+    /**
+     * 生成基础模板代码
+     * <p>
+     * @author: 张弓
+     * @date: 2018/7/21
+     * @version: 1.0.0
+     *
+     * @param packagePath
+     * @param zip
+     */
     public static void generatorBaseCode(String packagePath, ZipOutputStream zip) {
 
         Configuration config = getConfig();
@@ -168,6 +158,26 @@ public class GenService {
         //获取模板列表
         List<String> templates = getBaseTemplates();
         writerForZip(templates, null, context, zip, packagePath);
+    }
+
+    /**
+     * 获取基础模板
+     * <p>
+     *
+     * @return
+     * @throws
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/27
+     */
+    private static List<String> getBaseTemplates() {
+        List<String> templates = new ArrayList<String>();
+        templates.add("templates/velocity/BaseEntity.java.vm");
+        templates.add("templates/velocity/BaseMapper.java.vm");
+        templates.add("templates/velocity/BaseService.java.vm");
+        templates.add("templates/velocity/BaseServiceImpl.java.vm");
+        templates.add("templates/velocity/pom.xml.vm");
+        return templates;
     }
 
     /**
@@ -210,7 +220,6 @@ public class GenService {
 
     }
 
-
     /**
      * 列名转换成Java属性名
      * <p>
@@ -222,7 +231,7 @@ public class GenService {
      * @version : 1.0.0
      * @date : 2018/4/27
      */
-    public static String columnToJava(String columnName) {
+    private static String columnToJava(String columnName) {
         return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
@@ -238,7 +247,7 @@ public class GenService {
      * @version : 1.0.0
      * @date : 2018/4/27
      */
-    public static String tableToJava(String tableName, String tablePrefix) {
+    private static String tableToJava(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
             tableName = tableName.replace(tablePrefix, "");
         }
@@ -255,11 +264,11 @@ public class GenService {
      * @version : 1.0.0
      * @date : 2018/4/27
      */
-    public static Configuration getConfig() {
+    private static Configuration getConfig() {
         try {
             return new PropertiesConfiguration("gen.properties");
         } catch (ConfigurationException e) {
-            throw new BaseRunTimeException(BaseExceptionCode.PARSE_CONFIG_FAIL, e);
+            throw new BaseRunTimeException(BaseExceptionCode.DATASOURCE_CONFIG_FAIL, e);
         }
     }
 
@@ -276,7 +285,7 @@ public class GenService {
      * @version : 1.0.0
      * @date : 2018/4/27
      */
-    public static String getFileName(String template, String className, String packageName) {
+    private static String getFileName(String template, String className, String packageName) {
 
         String packagePath = "main" + File.separator + "java" + File.separator;
 

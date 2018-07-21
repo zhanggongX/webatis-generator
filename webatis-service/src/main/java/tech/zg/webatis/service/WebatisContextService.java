@@ -37,4 +37,15 @@ public interface WebatisContextService {
      * @version: 1.0.0
      */
     <T> T getBean(String beanName, Class<T> tClass);
+
+    /**
+     * 从spring容器中，移除bean
+     * <p>
+     * @author: 张弓
+     * @date: 2018/7/21
+     * @version: 1.0.0
+     *
+     * @param beanName 参数说明
+     */
+    void deleteBean(String beanName);
 }

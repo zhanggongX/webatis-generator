@@ -20,4 +20,8 @@ public class WebatisConstants {
      * jdbcTemplate bean name 使用
      */
     public static final String JDBC_TEMPLATE_NAME = "jdbcTemplate";
+    /**
+     * 向spring中注入bean的最大可失败次数
+     */
+    public static final int REGISTER_BEAN_MOST_COUNT = 3;
 }
