@@ -38,7 +38,7 @@
     </dependencies>
 
     <build>
-        <finalName>webatis</finalName>
+        <finalName>webatis-web</finalName>
 
         <plugins>
             <plugin>
@@ -49,15 +49,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <!-- 解决资源文件的编码问题 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
             </plugin>
 
             <!-- assembler 打包 -->
@@ -72,7 +63,7 @@
                     <useWildcardClassPath>true</useWildcardClassPath>
                     <daemons>
                         <daemon>
-                            <id>webatis</id>
+                            <id>webatis-web</id>
                             <mainClass>tech.zg.webatis.WebatisApplication</mainClass>
                             <commandLineArguments>
                                 <commandLineArgument>start</commandLineArgument>
@@ -98,7 +89,7 @@
                                         <!-- 文件存储路径和名称指定 -->
                                         <property>
                                             <name>wrapper.logfile</name>
-                                            <value>logs/webatis-generator.YYYYMMDD.log</value>
+                                            <value>logs/webatis.YYYYMMDD.log</value>
                                         </property>
                                         <!-- 按日期拆分文件 -->
                                         <property>
@@ -128,14 +119,14 @@
                             <jvmSettings>
                                 <!-- 系统环境变量 -->
                                 <extraArguments>
-                                    <extraArgument>-Xmx8192M</extraArgument>
-                                    <extraArgument>-Xms8192M</extraArgument>
-                                    <extraArgument>-Xmn4096M</extraArgument>
+                                    <extraArgument>-Xmx1024M</extraArgument>
+                                    <extraArgument>-Xms1024M</extraArgument>
+                                    <extraArgument>-Xmn521M</extraArgument>
                                     <extraArgument>-Xss512k</extraArgument>
                                     <extraArgument>-server </extraArgument>
                                     <extraArgument>-XX:MaxPermSize=256M</extraArgument>
                                     <extraArgument>-XX:-UseBiasedLocking</extraArgument>
-                                    <extraArgument>-XX:MaxDirectMemorySize=4G</extraArgument>
+                                    <extraArgument>-XX:MaxDirectMemorySize=2G</extraArgument>
                                     <extraArgument>-XX:+UseConcMarkSweepGC</extraArgument>
                                     <extraArgument>-XX:CMSFullGCsBeforeCompaction=5</extraArgument>
                                     <extraArgument>-XX:+UseCMSCompactAtFullCollection</extraArgument>
