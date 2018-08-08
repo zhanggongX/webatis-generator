@@ -9,6 +9,7 @@ package tech.zg.webatis.service.impl;
  * @version: 1.0.0
  */
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -114,6 +115,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         }
         LOGGER.info("query SQL is : " + querySql.toString());
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(querySql.toString());
+        LOGGER.info("query success !");
         TableBean tableBean = null;
         for (Map<String, Object> row : rows) {
             tableBean = new TableBean();
@@ -125,6 +127,7 @@ public class GeneratorServiceImpl implements GeneratorService {
             tableBeans.add(tableBean);
         }
 
+        LOGGER.info("获取到数据表信息: {}", JSON.toJSONString(tableBeans));
         return tableBeans;
     }
 

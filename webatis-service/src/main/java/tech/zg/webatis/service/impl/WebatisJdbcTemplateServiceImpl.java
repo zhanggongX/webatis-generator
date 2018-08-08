@@ -1,5 +1,6 @@
 package tech.zg.webatis.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +59,7 @@ public class WebatisJdbcTemplateServiceImpl implements WebatisJdbcTemplateServic
                 LOGGER.error("第" + (i + 1) + "次获取数据源失败!");
                 dynamicDateSourceService.registerDataSource(webatisDatabaseEntity);
             } else {
-                LOGGER.error("第" + (i + 1) + "次获取数据源成功!");
+                LOGGER.info("第" + (i + 1) + "次获取数据源成功!");
                 break;
             }
         }
@@ -75,7 +76,7 @@ public class WebatisJdbcTemplateServiceImpl implements WebatisJdbcTemplateServic
                     dynamicJdbcTemplateService.regiseterJdbcTemplate(webatisDatabaseEntity, comboPooledDataSource);
                 } else {
                     jdbcTemplate.setQueryTimeout(5);
-                    LOGGER.error("第" + (i + 1) + "次获取JdbcTemplate成功!");
+                    LOGGER.info("第" + (i + 1) + "次获取JdbcTemplate成功!");
                     break;
                 }
             }

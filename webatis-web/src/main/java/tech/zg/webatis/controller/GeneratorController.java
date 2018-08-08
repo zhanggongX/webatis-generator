@@ -87,7 +87,7 @@ public class GeneratorController {
         try {
             tableBeanList = generatorService.list(dbId, tableName);
         } catch (Exception e) {
-            LOGGER.error("获取数据库的表数据失败,请检查数据库的配置信息!", e.getMessage());
+            LOGGER.error("获取数据库的表数据失败,请检查数据库的配置信息: {}!", e);
             // 如果出现异常，删除数据源和jdbcTemplate
             webatisJdbcTemplateService.deleteDataSourceAndJdbcTemplate(dbId);
             return RestResult.error("获取数据库的表数据失败,请检查数据库的配置信息!");
@@ -109,7 +109,7 @@ public class GeneratorController {
      */
     @RequestMapping("/tableList")
     public ModelAndView list(ModelAndView mv) {
-        mv.setViewName("/gen/tableList");
+        mv.setViewName("gen/tableList");
         return mv;
     }
 }

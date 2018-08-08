@@ -38,9 +38,26 @@
     </dependencies>
 
     <build>
-        <finalName>webatis-web</finalName>
+        <!--<finalName>webatis-web</finalName>-->
 
         <plugins>
+            <!-- spring-boot-maven-plugin (提供了直接运行项目的插件：如果是通过parent方式继承spring-boot-starter-parent则不用此插件) -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+
+        <!--<plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -51,7 +68,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- assembler 打包 -->
+            &lt;!&ndash; assembler 打包 &ndash;&gt;
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
@@ -86,27 +103,27 @@
                                             <name>set.default.REPO_DIR</name>
                                             <value>lib</value>
                                         </property>
-                                        <!-- 文件存储路径和名称指定 -->
+                                        &lt;!&ndash; 文件存储路径和名称指定 &ndash;&gt;
                                         <property>
                                             <name>wrapper.logfile</name>
                                             <value>logs/webatis.YYYYMMDD.log</value>
                                         </property>
-                                        <!-- 按日期拆分文件 -->
+                                        &lt;!&ndash; 按日期拆分文件 &ndash;&gt;
                                         <property>
                                             <name>wrapper.logfile.rollmode</name>
                                             <value>DATE</value>
                                         </property>
-                                        <!-- 单个日志文件最大存储现在 -->
+                                        &lt;!&ndash; 单个日志文件最大存储现在 &ndash;&gt;
                                         <property>
                                             <name>wrapper.logfile.maxsize</name>
                                             <value>200m</value>
                                         </property>
-                                        <!-- 日志文件的数量限制，0无限制 -->
+                                        &lt;!&ndash; 日志文件的数量限制，0无限制 &ndash;&gt;
                                         <property>
                                             <name>wrapper.logfile.maxfiles</name>
                                             <value>7</value>
                                         </property>
-                                        <!-- 日志等级 -->
+                                        &lt;!&ndash; 日志等级 &ndash;&gt;
                                         <property>
                                             <name>wrapper.logfile.loglevel</name>
                                             <value>ERROR</value>
@@ -115,9 +132,9 @@
                                 </generatorConfiguration>
                             </generatorConfigurations>
 
-                            <!-- JVM 设置 -->
+                            &lt;!&ndash; JVM 设置 &ndash;&gt;
                             <jvmSettings>
-                                <!-- 系统环境变量 -->
+                                &lt;!&ndash; 系统环境变量 &ndash;&gt;
                                 <extraArguments>
                                     <extraArgument>-Xmx1024M</extraArgument>
                                     <extraArgument>-Xms1024M</extraArgument>
@@ -149,7 +166,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- 载入 assembler 配置 -->
+            &lt;!&ndash; 载入 assembler 配置 &ndash;&gt;
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
@@ -175,6 +192,6 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
-        </plugins>
+        </plugins>-->
     </build>
 </project>

@@ -1,5 +1,6 @@
 package tech.zg.webatis.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
@@ -78,7 +79,7 @@ public class DynamicDateSourceServiceImpl implements DynamicDateSourceService {
             } else if (webatisDatabaseEntity.getType().equals(WebatisConstants.ORACLE)) {
             }
             urlBuf.append(webatisDatabaseEntity.getUrl()).append(":").append(webatisDatabaseEntity.getPort()).append("/");
-            urlBuf.append(webatisDatabaseEntity.getName());
+            urlBuf.append(webatisDatabaseEntity.getName()).append("?useSSL=false&useUnicode=true&characterEncoding=utf-8");
             LOGGER.info("jdbcUrl is : " + urlBuf.toString());
             //获取bean名称
             String beanName = WebatisConstants.DATA_SOURCE_BEAN_NAME + webatisDatabaseEntity.getId();
@@ -97,10 +98,11 @@ public class DynamicDateSourceServiceImpl implements DynamicDateSourceService {
             // -获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效, 保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试, 获取连接失败后该数据源将申明已断开并永久关闭。Default: false
             varMap.put("breakAfterAcquireFailure", true);
             // 当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException,如设为0则无限期等待。单位毫秒。Default: 0
-             varMap.put("checkoutTimeout", 100);
+             varMap.put("checkoutTimeout", 3000);
             // 如果设为true那么在取得连接的同时将校验连接的有效性。Default: false
             varMap.put("testConnectionOnCheckin", true);
 
+            LOGGER.info("数据源注册信息: {}", JSON.toJSONString(varMap));
             //向spring容器注册数据源
             webatisContextService.registerBean(beanName, varMap, ComboPooledDataSource.class);
 
