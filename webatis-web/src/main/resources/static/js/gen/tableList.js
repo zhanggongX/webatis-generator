@@ -104,7 +104,14 @@ layui.config({
                 ,{field: 'engine', title: 'engine'}
                 ,{field: 'tableComment', title: '备注'}
                 ,{field: 'createTime', title: '创建时间', sort: true}
-            ]]
+            ]],
+            done: function (res, curr, count) {
+                console.log(res);
+                //var jsonRes = res.toJSON;
+                if(res.code != 0){
+                    layer.msg(res.message);
+                }
+            }
         });
     });
 });

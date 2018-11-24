@@ -67,4 +67,19 @@ public class WebatisContextServiceImpl implements WebatisContextService, Applica
         return applicationContext.getBean(beanName, tClass);
     }
 
+    /**
+     * 从spring容器中，移除bean
+     * <p>
+     *
+     * @param beanName 参数说明
+     * @author: 张弓
+     * @date: 2018/7/21
+     * @version: 1.0.0
+     */
+    @Override
+    public void deleteBean(String beanName) {
+
+        DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
+        beanFactory.removeBeanDefinition(beanName);
+    }
 }

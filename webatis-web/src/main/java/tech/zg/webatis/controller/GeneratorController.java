@@ -17,6 +17,7 @@ import tech.zg.webatis.common.RestResult;
 import tech.zg.webatis.pager.Pager;
 import tech.zg.webatis.pager.PagerUtil;
 import tech.zg.webatis.service.GeneratorService;
+import tech.zg.webatis.service.WebatisJdbcTemplateService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +42,8 @@ public class GeneratorController {
 
     @Autowired
     private GeneratorService generatorService;
-
+    @Autowired
+    private WebatisJdbcTemplateService webatisJdbcTemplateService;
     /**
      * 生成代码
      * <p>
@@ -85,7 +87,9 @@ public class GeneratorController {
         try {
             tableBeanList = generatorService.list(dbId, tableName);
         } catch (Exception e) {
-            LOGGER.error("获取数据库的表数据失败,请检查数据库的配置信息!", e);
+            LOGGER.error("获取数据库的表数据失败,请检查数据库的配置信息: {}!", e);
+            // 如果出现异常，删除数据源和jdbcTemplate
+            webatisJdbcTemplateService.deleteDataSourceAndJdbcTemplate(dbId);
             return RestResult.error("获取数据库的表数据失败,请检查数据库的配置信息!");
         }
         //为了兼容layui
@@ -105,7 +109,7 @@ public class GeneratorController {
      */
     @RequestMapping("/tableList")
     public ModelAndView list(ModelAndView mv) {
-        mv.setViewName("/gen/tableList");
+        mv.setViewName("gen/tableList");
         return mv;
     }
 }

@@ -43,30 +43,4 @@ public interface GeneratorService {
      * @version: 1.0.0
      */
     List<TableBean> list(Integer dbId, String tableName) throws Exception;
-
-    /**
-     * 通过表名，查询表信息
-     * <p>
-     *
-     * @param tableName
-     * @return TableEntity
-     * @author: 张弓
-     * @date:
-     * @version: 1.0.0
-     */
-    TableBean getTableInfoByTableName(JdbcTemplate jdbcTemplate, String tableName);
-
-    /**
-    * 根据表名查询所有的列信息
-    * <p>
-    *
-    * @param jdbcTemplate spring jdbcTemplate模板
-    * @param tableName 表名
-    * @return List<ColumnBean> 字段信息列表
-    * @throws
-    * @author : zhanggong
-    * @version : 1.0.0
-    * @date :
-    */
-    List<ColumnBean> queryColumnInfoByTableName(JdbcTemplate jdbcTemplate, String tableName);
 }
