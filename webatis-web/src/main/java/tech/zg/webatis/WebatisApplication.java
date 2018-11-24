@@ -19,7 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WebatisApplication {
 
     /**
-     * 我是man，我最牛逼
+     * 我是man
      * <p>
      *
      * @param args
