@@ -20,17 +20,46 @@ public class IndexController {
      * <p>
      *
      * @param mv
-     * @return
-     * @throws
+     * @return ModelAndView
      * @author : zhanggong
      * @version : 1.0.0
      * @date : 2018/4/28
      */
     @RequestMapping("/")
+    public ModelAndView defult(ModelAndView mv) {
+        mv.setViewName("index");
+        return mv;
+    }
+
+    /**
+     * 首页
+     * <p>
+     *
+     * @param mv
+     * @return ModelAndView
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
+    @RequestMapping("/index")
     public ModelAndView index(ModelAndView mv) {
         mv.setViewName("index");
         return mv;
     }
 
-
+    /**
+     * 登录
+     * <p>
+     *
+     * @param mv
+     * @return ModelAndView
+     * @author : zhanggong
+     * @version : 1.0.0
+     * @date : 2018/4/28
+     */
+    @RequestMapping("/login")
+    public ModelAndView login(ModelAndView mv) {
+        mv.setViewName("login");
+        return mv;
+    }
 }

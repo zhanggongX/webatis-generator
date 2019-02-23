@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.zg.webatis.mapper.UserMapper">
+
+    <!-- 可根据自己的需求，进行增减 -->
+
+    <resultMap type="tech.zg.webatis.entity.UserEntity" id="userMap">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="userNo" column="user_no"/>
+        <result property="realName" column="real_name"/>
+        <result property="deleted" column="deleted"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <sql id="userQuerySql">
+		t.id, 
+		t.user_name, 
+		t.password, 
+		t.user_no, 
+		t.real_name, 
+		t.deleted, 
+		t.created_at, 
+		t.updated_at
+    </sql>
+
+    <!-- 增 -->
+	<insert id="save" parameterType="tech.zg.webatis.entity.UserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into user
+		(
+			`user_name`, 
+			`password`, 
+			`user_no`, 
+			`real_name`, 
+			`deleted`, 
+			`created_at`, 
+			`updated_at`
+		)
+		values
+		(
+			#{userName}, 
+			#{password}, 
+			#{userNo}, 
+			#{realName}, 
+			#{deleted}, 
+			#{createdAt}, 
+			#{updateAt}
+		)
+	</insert>
+
+    <!-- 删 -->
+    <update id="remove">
+        update user t
+        <set>
+            t.deleted = 1
+        </set>
+        where
+			t.id = #{id}
+    </update>
+
+    <!-- 改 -->
+	<update id="update" parameterType="tech.zg.webatis.entity.UserEntity">
+		update user
+		<set>
+			<if test="userName != null">`user_name` = #{userName}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="userNo != null">`user_no` = #{userNo}, </if>
+			<if test="realName != null">`real_name` = #{realName}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}, </if>
+			<if test="createdAt != null">`created_at` = #{createdAt}, </if>
+			<if test="updatedAt != null">`updated_at` = #{updatedAt}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<!-- 查 -->
+    <select id="get" resultMap="userMap">
+        select
+        	<include refid="userQuerySql"/>
+        from user t
+        where
+        	t.deleted = 0
+        	and t.id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="userMap">
+        select
+        <include refid="userQuerySql"/>
+        from user t
+        where
+        t.deleted = 0
+        and t.user_name = #{userName}
+    </select>
+</mapper>

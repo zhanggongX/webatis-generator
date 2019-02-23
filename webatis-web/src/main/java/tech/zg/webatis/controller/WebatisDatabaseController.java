@@ -42,7 +42,7 @@ public class WebatisDatabaseController {
      */
     @RequestMapping("/add")
     public ModelAndView add(ModelAndView mv) {
-        mv.addObject("webatisDatabase", new WebatisDatabaseEntity());
+        mv.addObject( "webatisDatabase", new WebatisDatabaseEntity());
         mv.addObject("opType", "save");
         mv.setViewName("dbs/dbsAdd");
         return mv;

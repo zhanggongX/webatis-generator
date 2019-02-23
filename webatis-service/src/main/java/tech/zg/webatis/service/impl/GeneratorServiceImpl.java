@@ -1,13 +1,5 @@
 package tech.zg.webatis.service.impl;
 
-/**
- * 代码生成服务
- * <p>
- *
- * @author: 张弓
- * @date:
- * @version: 1.0.0
- */
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.io.IOUtils;
@@ -40,6 +32,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * 代码生成服务
+ * <p>
+ *
+ * @author: 张弓
+ * @date:
+ * @version: 1.0.0
+ */
 @Service("generatorService")
 public class GeneratorServiceImpl implements GeneratorService {
 

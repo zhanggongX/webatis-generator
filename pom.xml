@@ -17,7 +17,6 @@
     </parent>
 
     <modules>
-        <module>webaits-entity</module>
         <module>webatis-service</module>
         <module>webatis-web</module>
     </modules>

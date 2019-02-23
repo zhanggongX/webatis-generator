@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.zg.webatis.mapper.UserRoleMapper">
+
+    <!-- 可根据自己的需求，进行增减 -->
+
+    <resultMap type="tech.zg.webatis.entity.UserRoleEntity" id="userRoleMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="deleted" column="deleted"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <sql id="userRoleQuerySql">
+		t.id, 
+		t.user_id, 
+		t.role_id, 
+		t.deleted, 
+		t.created_at, 
+		t.updated_at
+    </sql>
+
+    <!-- 增 -->
+	<insert id="save" parameterType="tech.zg.webatis.entity.UserRoleEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into user_role
+		(
+			`user_id`, 
+			`role_id`, 
+			`deleted`, 
+			`created_at`, 
+			`updated_at`
+		)
+		values
+		(
+			#{userId}, 
+			#{roleId}, 
+			#{deleted}, 
+			#{createdAt}, 
+			#{updatedAt}
+		)
+	</insert>
+
+    <!-- 删 -->
+    <update id="remove">
+        update user_role t
+        <set>
+            t.deleted = 1
+        </set>
+        where
+			t.id = #{id}
+    </update>
+
+    <!-- 改 -->
+	<update id="update" parameterType="tech.zg.webatis.entity.UserRoleEntity">
+		update user_role
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="roleId != null">`role_id` = #{roleId}, </if>
+			<if test="deleted != null">`deleted` = #{deleted}, </if>
+			<if test="createdAt != null">`created_at` = #{createdAt}, </if>
+			<if test="updatedAt != null">`updated_at` = #{updatedAt}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<!-- 查 -->
+    <select id="get" resultMap="userRoleMap">
+        select
+        	<include refid="userRoleQuerySql"/>
+        from user_role t
+        where
+        	t.deleted = 0
+        	and t.id = #{id}
+    </select>
+
+    <select id="findByUserId" resultMap="userRoleMap">
+        select
+        <include refid="userRoleQuerySql"/>
+        from user_role t
+        where
+        t.deleted = 0
+        and t.user_id = #{userId}
+    </select>
+</mapper>
