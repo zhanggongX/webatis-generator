@@ -1,5 +1,6 @@
 package tech.zg.webatis.controller;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import tech.zg.webatis.pager.Pager;
 import tech.zg.webatis.pager.PagerUtil;
 import tech.zg.webatis.service.WebatisDatabaseService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -41,10 +43,16 @@ public class WebatisDatabaseController {
      * @date : 2018/4/28
      */
     @RequestMapping("/add")
-    public ModelAndView add(ModelAndView mv) {
+    public ModelAndView add(HttpServletRequest request, ModelAndView mv) {
+        String paramAdd = request.getParameter("from");
         mv.addObject( "webatisDatabase", new WebatisDatabaseEntity());
         mv.addObject("opType", "save");
-        mv.setViewName("dbs/dbsAdd");
+
+        if(StringUtils.isNotBlank(paramAdd) && paramAdd.equals("menu")){
+            mv.setViewName("dbs/dbsMenuAdd");
+        }else {
+            mv.setViewName("dbs/dbsAdd");
+        }
         return mv;
     }
 

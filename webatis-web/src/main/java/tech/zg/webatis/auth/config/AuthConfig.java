@@ -42,8 +42,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                // 静态资源所有用户都可以访问
-                // .antMatchers("/**").permitAll()
                 // 配置页面要admin用户才可以访问
                 // .antMatchers("/config").hasRole("admin")
                 // 其他URL只需要验证用户即可访问
@@ -51,12 +49,12 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 // 指定登录页，登录失败页，成功默认页。
                 // .and().formLogin().loginPage("/login").failureUrl("/login").defaultSuccessUrl("/index").permitAll()
                 // .and().formLogin().loginPage("/login").failureUrl("/login").permitAll()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/login").permitAll()
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/index").loginProcessingUrl("/loginCheck").permitAll()
                 // frame禁用去掉
                 .and().headers().frameOptions().disable()
                 // 登出默认页
                 .and().logout().logoutSuccessUrl("/login").permitAll().invalidateHttpSession(true);
-                //.and().logout().permitAll();
+        //.and().logout().permitAll();
 
         http.csrf().disable();
 
@@ -99,7 +97,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-
-        web.ignoring().antMatchers("/js/**", "/layui/**");
+        web.ignoring().antMatchers("/js/**", "/layui/**", "/fslayui/**", "/images/**");
     }
 }

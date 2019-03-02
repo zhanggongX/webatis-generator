@@ -41,7 +41,12 @@ public class AuthService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         UserEntity userEntity = userService.findByName(name);
-        List<UserRoleEntity> userRoleEntities = userRoleService.findByUserId(userEntity.getId());
+        List<UserRoleEntity> userRoleEntities = null;
+        try {
+            userRoleEntities = userRoleService.findByUserId(userEntity.getId());
+        }catch (Exception e){
+            return null;
+        }
         if (CollectionUtils.isNotEmpty(userRoleEntities)) {
             for (UserRoleEntity userRole : userRoleEntities) {
                 try {

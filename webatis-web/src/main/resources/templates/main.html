@@ -35,9 +35,9 @@
     </ul>-->
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
-            <a href="javascript:;">
+            <a id="user" href="javascript:;">
                 <img src="" class="layui-nav-img"/>
-                张弓
+                <input type="hidden" id = "userName">
             </a>
             <dl class="layui-nav-child">
                 <dd><a href="">基本资料</a></dd>
@@ -59,11 +59,12 @@
             <li class="layui-nav-item layui-nav-itemed">
                 <a class="" href="javascript:;">数据库管理</a>
                 <dl class="layui-nav-child">
-                    <!--<dd><a href="/dbs/add">添加数据库</a></dd>-->
+                    <dd><a th:href="${_contextPath}+ '/dbs/add?from=menu'">添加数据库</a></dd>
                     <dd><a th:href="${_contextPath}+ '/dbs/list'">数据库列表</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item layui-nav-itemed">
+            <!--layui-nav-itemed是否打开-->
+            <li class="layui-nav-item">
                 <a class="" href="javascript:;">代码生成</a>
                 <dl class="layui-nav-child">
                     <dd><a th:href="${_contextPath}+ '/gen/tableList'">选择数据表</a></dd>

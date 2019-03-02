@@ -3,59 +3,54 @@
 <head>
     <title>数据库表列表</title>
     <div th:replace="main::resources"></div>
+    <link rel="stylesheet" th:href="${_contextPath} + '/fslayui/css/login.css'"/>
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <!--<div th:replace="main::navbar"></div>-->
-    <!--<div th:replace="main::menu"></div>-->
-
-    <div class="layui-body">
-        <!--<table style="text-align: center;">-->
-        <form  class="layui-form" th:action="${_contextPath} + '/login'" method="post">
-
-            <h2 class="form-signin-heading">用户登录</h2>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">输入框</label>
-                <div class="layui-input-block">
-                    <input type="text" name="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+<body>
+<div class="login-back"></div>
+<div class="layui-container">
+    <!--<div class="logo"><img th:src="${_contextPath} + '/fslayui/images/logo.png'" width="50" height="50"></div>-->
+    <div class="logo"></div>
+    <div class="logo-title">Webatis代码生成工具</div>
+    <div class="logo-txt">配置数据源后，选择相应的数据库，就可以生成代码了</div>
+    <div class="layui-row login-box">
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+            <div class="login-img"><img th:src="${_contextPath} + '/fslayui/images/login-left.png'"></div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+            <div class="login-tt">账户登录</div>
+            <input type="hidden" id="errorInfo" th:value="${error}">
+            <form class="login-form" th:action="${_contextPath} + '/loginCheck'" method="post">
+                <input type="text" name="username" placeholder="默认用户root" required lay-verify="required"
+                       class="layui-input login01" autocomplete="off">
+                <input type="text" name="password" placeholder="默认密码admin" required lay-verify="required"
+                       class="layui-input login02" autocomplete="off">
+                <div class="relative">
+                    <input type="text" placeholder="没有验证码呢" class="layui-input login03">
+                    <div class="yzm"><img th:src="${_contextPath} + '/fslayui/images/yzm.png'"></div>
                 </div>
-            </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">密码框</label>
-                <div class="layui-input-inline">
-                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">辅助文字</div>
-            </div>
-
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-            <!--<table>
-                <tr>
-                    <td>用户名:</td>
-                    <td><input type="text" name="username"  class="form-control"  placeholder="请输入用户名"/></td>
-                </tr>
-                <tr>
-                    <td>密码:</td>
-                    <td><input type="password" name="password"  class="form-control" placeholder="请输入密码" /></td>
-                </tr>
-                <tr>
-
-                    <td colspan="2">
-                        <button type="submit"  class="btn btn-lg btn-primary btn-block" >登录</button>
-                    </td>
-                </tr>
-            </table>-->
-        <!--</table>-->
-        </form>
+                <button type="submit" class="layui-btn login-btn">登录</button>
+                <button type="reset" class="layui-btn login-reset">重置</button>
+            </form>
+        </div>
     </div>
-    <!--<div th:replace="main::appFooter"></div>-->
 </div>
 </body>
+<script>
+    layui.config({
+        version: false
+        , debug: false
+    }).use(['layer', 'jquery'], function () {
+        var element = layui.element,
+            layer = layui.layer,
+            $ = layui.jquery;
+
+        $().ready(function () {
+            var errorInfo = $("#errorInfo").val();
+            console.log(errorInfo);
+            if (errorInfo != null && errorInfo != undefined && errorInfo != "") {
+                layer.msg(errorInfo, {icon: 2});
+            }
+        });
+    });
+</script>
 </html>
