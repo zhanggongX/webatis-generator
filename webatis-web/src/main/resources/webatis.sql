@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 02/03/2019 15:25:17
+ Date: 04/03/2019 15:37:06
 */
 
 SET NAMES utf8mb4;
@@ -29,13 +29,14 @@ CREATE TABLE `role`  (
   `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES (1, 'admin', NULL, 0, NULL, NULL);
-INSERT INTO `role` VALUES (2, 'user', NULL, 0, NULL, NULL);
+INSERT INTO `role` VALUES (1, 'admin', NULL, 0, '2019-03-04 15:35:07', '2019-03-04 15:35:07');
+INSERT INTO `role` VALUES (2, 'user', NULL, 0, '2019-03-04 15:35:07', '2019-03-04 15:35:07');
+INSERT INTO `role` VALUES (3, 'ACTUATOR', NULL, 0, '2019-03-04 15:35:07', '2019-03-04 15:35:07');
 
 -- ----------------------------
 -- Table structure for user
@@ -71,13 +72,14 @@ CREATE TABLE `user_role`  (
   `created_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES (1, 1, 1, 0, NULL, NULL);
 INSERT INTO `user_role` VALUES (2, 2, 1, 0, NULL, NULL);
+INSERT INTO `user_role` VALUES (3, 2, 3, 0, '2019-03-04 15:35:34', '2019-03-04 15:35:34');
 
 -- ----------------------------
 -- Table structure for webatis_databases

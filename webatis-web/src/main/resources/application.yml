@@ -35,3 +35,6 @@ logback:
 security:
   basic:
     enabled: false
+
+management:
+  context-path: /appInfo
