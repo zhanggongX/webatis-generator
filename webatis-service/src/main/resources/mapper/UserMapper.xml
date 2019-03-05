@@ -94,4 +94,20 @@
         t.deleted = 0
         and t.user_name = #{userName}
     </select>
+
+    <resultMap type="tech.zg.webatis.bean.UserRoleBean" id="userRoleMap">
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <collection property="roleNames" ofType="java.lang.String">
+            <result column="role_name"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findUserRoleByName" resultMap="userRoleMap">
+        select u.user_name, u.password, r.role_name
+        from user u
+        left join user_role ur on u.id = ur.user_id
+        left join role r on ur.role_id = r.id
+        where user_name = #{userName};
+    </select>
 </mapper>

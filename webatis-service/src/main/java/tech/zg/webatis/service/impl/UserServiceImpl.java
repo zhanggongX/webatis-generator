@@ -4,9 +4,12 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import tech.zg.webatis.bean.UserRoleBean;
 import tech.zg.webatis.entity.UserEntity;
 import tech.zg.webatis.mapper.UserMapper;
 import tech.zg.webatis.service.UserService;
+
+import java.util.List;
 
 /**
  * 用户表
@@ -40,6 +43,24 @@ public class UserServiceImpl extends BaseServiceImpl<Integer, UserEntity> implem
     public UserEntity findByName(String userName) {
         if(!StringUtils.isEmpty(userName)){
             return userMapper.findByName(userName);
+        }
+        return null;
+    }
+
+    /**
+     * 根据用户名查询用户角色
+     * <p>
+     *
+     * @param userName
+     * @return UserRoleBean
+     * @author: 张弓
+     * @date: 2019/2/23
+     * @version: 1.0.0
+     */
+    @Override
+    public UserRoleBean findUserRoleByName(String userName) {
+        if(!StringUtils.isEmpty(userName)){
+            return userMapper.findUserRoleByName(userName);
         }
         return null;
     }

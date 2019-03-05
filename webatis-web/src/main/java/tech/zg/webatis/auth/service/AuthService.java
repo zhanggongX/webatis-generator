@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import tech.zg.webatis.bean.UserRoleBean;
 import tech.zg.webatis.entity.RoleEntity;
 import tech.zg.webatis.entity.UserEntity;
 import tech.zg.webatis.entity.UserRoleEntity;
@@ -37,27 +38,17 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        UserEntity userEntity = userService.findByName(name);
-        List<UserRoleEntity> userRoleEntities = null;
-        try {
-            userRoleEntities = userRoleService.findByUserId(userEntity.getId());
-        }catch (Exception e){
-            return null;
-        }
-        if (CollectionUtils.isNotEmpty(userRoleEntities)) {
-            for (UserRoleEntity userRole : userRoleEntities) {
-                try {
-                    RoleEntity role = roleService.get(userRole.getRoleId());
-                    authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-                } catch (BaseException e) {
-                    e.printStackTrace();
+        UserRoleBean userRole = userService.findUserRoleByName(name);
+        if (userRole != null) {
+            if (CollectionUtils.isNotEmpty(userRole.getRoleNames())) {
+                for (String roleName : userRole.getRoleNames()) {
+                    authorities.add(new SimpleGrantedAuthority(roleName));
                 }
             }
+            return new User(userRole.getUserName(), userRole.getPassword(), authorities);
         }
-
-        return new User(userEntity.getUserName(), userEntity.getPassword(), authorities);
+        return null;
     }
 }
