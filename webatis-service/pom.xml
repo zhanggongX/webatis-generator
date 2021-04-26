@@ -12,7 +12,7 @@
     <artifactId>webatis-service</artifactId>
 
     <properties>
-        <commons.io.version>2.5</commons.io.version>
+        <commons.io.version>2.7</commons.io.version>
         <commons.configuration.version>1.10</commons.configuration.version>
         <velocity.version>1.7</velocity.version>
     </properties>
